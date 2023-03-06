@@ -1,0 +1,24 @@
+[
+    {
+        "_sitename": "local0",
+        "file_names": [
+            "subject_1.nii"
+        ],
+        "algorithm": "gigica",
+        "preproc": "time_mean",
+        "mask": "mask.mat",
+        "ica_sig": "gica_signal.mat",
+        "ica_varname": "SM"
+    },
+    {
+        "_sitename": "local1",
+        "file_names": [
+            "subject_2.nii"
+        ],
+        "algorithm": "dualregress",
+        "preproc": "time_mean",
+        "mask": "mask.mat",
+        "ica_sig": "gica_signal.mat",
+        "ica_varname": "SM"
+    }
+]

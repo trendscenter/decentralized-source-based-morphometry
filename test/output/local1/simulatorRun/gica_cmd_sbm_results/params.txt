@@ -1,0 +1,17 @@
+....................................................                                              		
+                                                                                                  		
+Number of Independent Components : 5                                                              		
+ICA Algorithm : Sparse ICA-EBM                                                                    		
+Number Of Subjects : 5                                                                            		
+Mask File : mask                                                                                  		
+PCA Type : Standard                                                                               		
+Scaling Components : No Scaling                                                                   		
+Stability analysis type : none                                                                    		
+Anatomical file: /computation/mcrcache/.mcrCache9.1/groupi1/icatb/icatb_templates/ch2bet_3x3x3.nii		
+Slice Plane: Axial                                                                                		
+Image values: Positive                                                                            		
+Convert to Z-scores: Yes                                                                          		
+Threshold: 1                                                                                      		
+                                                                                                  		
+....................................................                                              		
+                                                                                                  		

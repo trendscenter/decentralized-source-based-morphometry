@@ -1,0 +1,116 @@
+[
+    {
+        "data": {
+            "value": [
+                [
+                    "local0.sub0.data.npz",
+                    "local0.sub1.data.npz",
+                    "local0.sub2.data.npz",
+                    "local0.sub3.data.npz",
+                    "local0.sub4.data.npz"
+                ],
+                [
+                    "npzfile"
+                ]
+            ]
+        },
+        "num_PC_global": {
+            "value": 20
+        },
+        "axis": {
+            "value": -1
+        },
+        "mean_values": {
+            "value": [
+                [
+                    "row_mean_global.npz"
+                ],
+                [
+                    "npzfile"
+                ]
+            ]
+        },
+        "subject_level_PCA": {
+            "value": false
+        },
+        "subject_level_num_PC": {
+            "value": 120
+        }
+    },
+    {
+        "data": {
+            "value": [
+                [
+                    "local1.sub0.data.npz",
+                    "local1.sub1.data.npz",
+                    "local1.sub2.data.npz",
+                    "local1.sub3.data.npz",
+                    "local1.sub4.data.npz"
+                ],
+                [
+                    "npzfile"
+                ]
+            ]
+        },
+        "num_PC_global": {
+            "value": 20
+        },
+        "axis": {
+            "value": -1
+        },
+        "mean_values": {
+            "value": [
+                [
+                    "row_mean_global.npz"
+                ],
+                [
+                    "npzfile"
+                ]
+            ]
+        },
+        "subject_level_PCA": {
+            "value": false
+        },
+        "subject_level_num_PC": {
+            "value": 120
+        }
+    },
+    {
+        "data": {
+            "value": [
+                [
+                    "local2.sub0.data.npz",
+                    "local2.sub1.data.npz",
+                    "local2.sub2.data.npz",
+                    "local2.sub3.data.npz",
+                    "local2.sub4.data.npz"
+                ],
+                [
+                    "npzfile"
+                ]
+            ]
+        },
+        "num_PC_global": {
+            "value": 20
+        },
+        "axis": {
+            "value": -1
+        },
+        "mean_values": {
+            "value": [
+                [
+                    "row_mean_global.npz"
+                ],
+                [
+                    "npzfile"
+                ]
+            ]
+        },
+        "subject_level_PCA": {
+            "value": false
+        },
+        "subject_level_num_PC": {
+            "value": 120
+        }
+    }
+]

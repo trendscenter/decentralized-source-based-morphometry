@@ -1,0 +1,128 @@
+Starting Analysis 
+
+ 
+------------------------------------------------------------------------------------
+GETTING DATA REDUCTION PARAMETERS----------------------
+------------------------------------------------------------------------------------
+ Reduction step 1 starts with 1 groups and gets reduced to 1 groups
+    -New Group #1: 1 groups will be concatenated to form the new group.
+     Each of the to be concatenated groups is made up of 5 Subjects
+     The new group will have a total of 5 stacked Subjects
+     This group will then be reduced to 5 principal components
+------------------------------------------------------------------------------------
+END GETTING DATA REDUCTION PARAMETERS----------------------
+------------------------------------------------------------------------------------
+ 
+Checking to make sure parameters are correct...
+  Checking mask 
+  Checking principal component parameters
+Done with parameter error check 
+ 
+------------------------------------------------------------------------------------
+STARTING DATA REDUCTION (PRINCIPAL COMPONENTS ANALYSIS)
+------------------------------------------------------------------------------------
+--Extracting principal components for data reduction( time #1 )
+
+Doing pca
+Loading data-set 1 ...
+Removing mean per time point ...
+Loading data-set 2 ...
+Removing mean per time point ...
+Loading data-set 3 ...
+Removing mean per time point ...
+Loading data-set 4 ...
+Removing mean per time point ...
+Loading data-set 5 ...
+Removing mean per time point ...
+Using Eigen Value Decomposition ...
+Covariance matrix size is 5 ^2
+Calculating eigendecomposition
+Sorting eigenvalues
+Selecting Desired Eigenvalues
+100% of (non-zero) eigenvalues retained.
+Removing mean per time point ...
+
+
+Done with data reduction( time # 1)
+ 
+------------------------------------------------------------------------------------
+ENDING DATA REDUCTION (PRINCIPAL COMPONENTS ANALYSIS)
+------------------------------------------------------------------------------------
+ 
+---------------------------------------------------------------------
+STARTING GROUP ICA STEP 
+---------------------------------------------------------------------
+
+Number of times ICA will run is 1
+
+Run 1 / 1
+
+
+Using skewness of the distribution to determine the sign of the components ...
+Changing sign of component 1
+Changing sign of component 2
+Changing sign of component 3
+Changing sign of component 4
+---------------------------------------------------------------------
+DONE CALCULATING GROUP ICA
+---------------------------------------------------------------------
+ 
+---------------------------------------------------------------------
+STARTING BACK RECONSTRUCTION STEP
+---------------------------------------------------------------------
+
+Using GIG-ICA Back Reconstruction Approach ...
+
+Back reconstructing  set 1
+Removing mean per time point ...
+-done back reconstructing  set 1
+-saving back reconstructed ica data for set 1 -> gica_cmd_ica_br1.mat
+---------------------------------------------------------------------
+DONE WITH BACK RECONSTRUCTION STEP
+---------------------------------------------------------------------
+ 
+ 
+---------------------------------------------------------------------
+STARTING TO SCALE COMPONENT SETS
+---------------------------------------------------------------------
+--Subject 1 Session 1's Component Set
+Not scaling components
+...saving scaled ica data for subject 1 session 1 in nifti format and as matlab file
+---------------------------------------------------------------------
+DONE SCALING COMPONENTS
+---------------------------------------------------------------------
+ 
+ 
+---------------------------------------------------------------------
+STARTING GROUP STATS STEP
+---------------------------------------------------------------------
+Only one subject, not calculating stats
+---------------------------------------------------------------------
+ENDING GROUP STATS STEP
+---------------------------------------------------------------------
+ 
+Time taken to run the analysis is 21.8587 seconds
+
+All the analysis information is stored in the file /output/local1/simulatorRun/gica_cmd_results.log
+Finished with Analysis
+
+Generating reults summary. Please wait ....
+....................................................                                              
+                                                                                                  
+Number of Independent Components : 5                                                              
+ICA Algorithm : Sparse ICA-EBM                                                                    
+Number Of Subjects : 5                                                                            
+Mask File : mask                                                                                  
+PCA Type : Standard                                                                               
+Scaling Components : No Scaling                                                                   
+Stability analysis type : none                                                                    
+Anatomical file: /computation/mcrcache/.mcrCache9.1/groupi1/icatb/icatb_templates/ch2bet_3x3x3.nii
+Slice Plane: Axial                                                                                
+Image values: Positive                                                                            
+Convert to Z-scores: Yes                                                                          
+Threshold: 1                                                                                      
+                                                                                                  
+....................................................                                              
+                                                                                                  
+
+Done
