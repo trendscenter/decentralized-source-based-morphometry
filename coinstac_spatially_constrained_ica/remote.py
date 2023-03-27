@@ -5,7 +5,9 @@ Created on Mon March 6 2023
 """
 
 import sys
+import os
 import ujson as json
+import utils as ut
 from utils import listRecursive
 import numpy as np
 import matplotlib.pyplot as plt
@@ -14,9 +16,11 @@ def scica_remote_noop(args):
 
     # concat the loading parameters from all sites
     concat_loading_parameters = np.vstack([np.load(os.path.join(args["state"]["baseDirectory"], site, args["input"][site]["loading_parameter"])) for site in args["input"]])
-
+    ut.log("Stacked loading parameters shape: "+str(concat_loading_parameters.shape), args["state"])
     # compute the correlation matrix
     correlation_matrix = np.corrcoef(concat_loading_parameters)
+
+    ut.log("Computed correlation matrix ", args["state"])
 
     # plot correlation matrix
     plt.imshow(correlation_matrix)
@@ -24,17 +28,20 @@ def scica_remote_noop(args):
     c = plt.colorbar()
     plt.clim(-1, 1)
 
+    ut.log("plotting correlation matrix ", args["state"])
     # save figure and send to each local site
-    pl.savefig(os.path.join(args['state']['outputDirectory'],'loading_correlation_map.png'))
-    pl.savefig(os.path.join(args['state']['transferDirectory'], 'loading_correlation_map.png'))
+    plt.savefig(os.path.join(args['state']['outputDirectory'],'loading_correlation_map.png'))
+    plt.savefig(os.path.join(args['state']['transferDirectory'], 'loading_correlation_map.png'))
 
+    ut.log("saving correlation matrix plots in output and transfer dirs", args["state"])
     computation_output = {}
     computation_output['success'] = True
     computation_output['output'] = {}
     computation_output['output']['final_embedding'] = 0
     computation_output['output']['file_name'] = 'sample_fig.png'
+    computation_output['state'] = args["state"]
 
-    return json.dumps(computation_output)
+    return computation_output
 
 
 if __name__ == '__main__':

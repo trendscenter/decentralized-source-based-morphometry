@@ -171,9 +171,9 @@ SPATIALLY_CONSTRAINED_ICA_LOCAL = [
     dict(
         do=[
             scica_local.scica_local_1,
-            ops_local.local_output_to_cache,
-            ops_local.local_dump_cache_to_npy,
-            ops_local.local_clear_cache
+            #ops_local.local_output_to_cache,
+            #ops_local.local_dump_cache_to_npy,
+            #ops_local.local_clear_cache
         ],
         recv=[],
         send='scica_local_1',
@@ -194,6 +194,7 @@ SPATIALLY_CONSTRAINED_ICA_LOCAL = [
 SPATIALLY_CONSTRAINED_ICA_REMOTE = [
     dict(
         do=[
+            scica_remote.scica_remote_noop,
             ops_remote.remote_noop
         ],
         recv=SPATIALLY_CONSTRAINED_ICA_LOCAL[0].get('send'),

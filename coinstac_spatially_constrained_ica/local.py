@@ -41,14 +41,18 @@ def scica_local_1(args):
     # send files to transfer directory
     np.save(os.path.join(args['state']['transferDirectory'], 'loading_parameter.npy'), loading_parameter)
 
+    output_dict = {
+    'loading_parameter': 'loading_parameter.npy',
+    'computation_phase': 'scica_local_1'
+    }
+    cache_dict = {}
     computation_output = {
-        "output": {
-            "loading_parameter": 'loading_parameter.npy',
-            "computation_phase": "scica_local_1"
-        }
+      "output": output_dict,
+      "cache": cache_dict,
+      "state": state
     }
 
-    return json.dumps(computation_output)
+    return computation_output
 
 
 def scica_check_out(args):
