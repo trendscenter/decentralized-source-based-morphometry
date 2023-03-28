@@ -11,24 +11,28 @@ import utils as ut
 from utils import listRecursive
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 
 def scica_remote_noop(args):
 
     # concat the loading parameters from all sites
     concat_loading_parameters = np.vstack([np.load(os.path.join(args["state"]["baseDirectory"], site, args["input"][site]["loading_parameter"])) for site in args["input"]])
-    ut.log("Stacked loading parameters shape: "+str(concat_loading_parameters.shape), args["state"])
-    # compute the correlation matrix
-    correlation_matrix = np.corrcoef(concat_loading_parameters)
+    #ut.log("Stacked loading parameters shape: "+str(concat_loading_parameters.shape), args["state"])
 
-    ut.log("Computed correlation matrix ", args["state"])
+    corr_dataframe = pd.DataFrame(concat_loading_parameters)
+
+    # compute the correlation 
+    corr_matrix = corr_dataframe.corr(method='pearson')
+
+    #ut.log("Computed correlation matrix ", args["state"])
 
     # plot correlation matrix
-    plt.imshow(correlation_matrix)
-    plt.title('Correlation map of loading parameters')
+    plt.imshow(corr_matrix)
+    plt.title('Correlation Map')
     c = plt.colorbar()
     plt.clim(-1, 1)
 
-    ut.log("plotting correlation matrix ", args["state"])
+    #ut.log("plotting correlation matrix ", args["state"])
     # save figure and send to each local site
     plt.savefig(os.path.join(args['state']['outputDirectory'],'loading_correlation_map.png'))
     plt.savefig(os.path.join(args['state']['transferDirectory'], 'loading_correlation_map.png'))
