@@ -2,7 +2,8 @@
     {
         "data": {
             "value": [
-                "sub-001_task-sbm_bold_prev.nii"
+                "sub-001_task-sbm_bold_prev.nii",
+                "site_1_sub-001_task-sbm_bold_prev_sec.nii"
             ]
         },
         "mask": {
@@ -14,7 +15,7 @@
             ]
         },
         "num_ics": {
-            "value": 5
+            "value": 30
         },
         "scica_template": {
             "value": "/computation/local_data/NeuroMark.nii"
@@ -39,9 +40,9 @@
         },
         "numOfPCs": {
             "value": [
-                5,
-                5,
-                5
+                30,
+                30,
+                30
             ]
         },
         "univariate_test_list": {
@@ -167,6 +168,7 @@
         "data": {
             "value": [
                 "sub-001_task-sbm_bold_prev.nii"
+                
             ]
         },
         "mask": {
@@ -178,7 +180,7 @@
             ]
         },
         "num_ics": {
-            "value":5 
+            "value":30
         },
         "scica_template": {
             "value": "/computation/local_data/NeuroMark.nii"
@@ -203,9 +205,9 @@
         },
         "numOfPCs": {
             "value": [
-                5,
-                5,
-                5
+                30,
+                30,
+                30
             ]
         },
         "univariate_test_list": {
