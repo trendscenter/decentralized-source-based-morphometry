@@ -1,9 +1,0 @@
-
-
-ComponentNumber	Timecourses	SpatialMaps	
-
-1              	1.379      	1.999      	
-2              	1.812      	4.567      	
-3              	1.338      	4.792      	
-4              	2.163      	4.527      	
-5              	2.077      	4.074      	

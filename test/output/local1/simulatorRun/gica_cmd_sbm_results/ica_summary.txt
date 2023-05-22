@@ -1,9 +1,0 @@
-
-
-ComponentNumber	PercentVariance	
-
-1              	83.844         	
-2              	 1.653         	
-3              	 1.778         	
-4              	12.617         	
-5              	 1.199         	
