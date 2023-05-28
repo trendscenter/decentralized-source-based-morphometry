@@ -2,25 +2,25 @@ import os
 from nipype.interfaces import gift
 
 # GICA DEFAULTS
-DEFAULT_DIM = 4 #ce0118 was 100
-DEFAULT_ALG = 16
+DEFAULT_DIM = 30 #ce0118 was 100.  Should not be needed for constrained SBM
+DEFAULT_ALG = 15 # previously it was 16. Here 15 is GIGICA. The gift version is /computation/groupica_git_012423/run_groupica.sh 
 DEFAULT_ICA_PARAM_FILE = ''
 DEFAULT_OUT_DIR = '.'
 DEFAULT_DISPLAY_RESULTS = 0
 DEFAULT_REFS = []
 DEFAULT_RUN_NAME = 'COINSTAC_SCICA'
-DEFAULT_GROUP_PCA_TYPE = 0
-DEFAULT_BACK_RECON_TYPE = 5
-DEFAULT_PREPROC_TYPE = 1
-DEFAULT_NUM_REDUCTION_STEPS = 1
-DEFAULT_SCALE_TYPE = 0
+#DEFAULT_GROUP_PCA_TYPE = 0 # Should not be needed for constrained SBM
+#DEFAULT_BACK_RECON_TYPE = 5 # Should not be needed for constrained SBM
+#DEFAULT_PREPROC_TYPE = 1 # Should not be needed for constrained SBM
+#DEFAULT_NUM_REDUCTION_STEPS = 1  # Should not be needed for constrained SBM
+DEFAULT_SCALE_TYPE = 2
 DEFAULT_GROUP_ICA_TYPE = 'spatial'
 DEFAULT_WHICH_ANALYSIS = 1
 DEFAULT_MASK = ''
 
 matlab_cmd = '/computation/groupica_git_012423/run_groupica.sh /usr/local/MATLAB/MATLAB_Runtime/v91/'
 
-
+'''
 def gift_gica(
     in_files=[], dim=DEFAULT_DIM, algoType=DEFAULT_ALG, refFiles=DEFAULT_REFS,
     run_name=DEFAULT_RUN_NAME, out_dir=DEFAULT_OUT_DIR, group_pca_type=DEFAULT_GROUP_PCA_TYPE,
@@ -29,6 +29,16 @@ def gift_gica(
     group_ica_type=DEFAULT_GROUP_ICA_TYPE, display_results=DEFAULT_DISPLAY_RESULTS,
     which_analysis=DEFAULT_WHICH_ANALYSIS, mask=DEFAULT_MASK
 ):
+'''
+
+def gift_gica(
+    in_files=[], dim=DEFAULT_DIM, algoType=DEFAULT_ALG, refFiles=DEFAULT_REFS,
+    run_name=DEFAULT_RUN_NAME, out_dir=DEFAULT_OUT_DIR, 
+    scaleType=DEFAULT_SCALE_TYPE,
+    display_results=DEFAULT_DISPLAY_RESULTS,
+    which_analysis=DEFAULT_WHICH_ANALYSIS, mask=DEFAULT_MASK
+):
+ 
     """
     Wrapper for initializing GIFT nipype interface to run Group ICA.
 
@@ -72,17 +82,17 @@ def gift_gica(
     gc.inputs.in_files = in_files
     gc.inputs.algoType = algoType
     #gc.inputs.group_pca_type = group_pca_type
-    gc.inputs.backReconType = backReconType
+    # gc.inputs.backReconType = backReconType #removed due to constr sbm
     gc.inputs.modalityType = "sMRI"
-    gc.inputs.preproc_type = preproc_type
-    gc.inputs.numReductionSteps = numReductionSteps
+    gc.inputs.preproc_type = 1 #preproc_type # #removed due to constr sbm
+    #gc.inputs.numReductionSteps = numReductionSteps #removed due to constr sbm
     gc.inputs.scaleType = scaleType
-    gc.inputs.group_ica_type = group_ica_type
+    # gc.inputs.group_ica_type = group_ica_type #removed due to constr sbm
     gc.inputs.which_analysis = which_analysis
     gc.inputs.refFiles = refFiles
     gc.inputs.display_results = display_results
     gc.inputs.mask = mask
-    gc.inputs.df = 5
+    #gc.inputs.df = 5 # Should not be needed for constrained SBM
 
     if dim > 0:
         gc.inputs.dim = dim

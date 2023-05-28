@@ -15,7 +15,7 @@
             ]
         },
         "num_ics": {
-            "value": 30
+            "value": 5
         },
         "scica_template": {
             "value": "/computation/local_data/NeuroMark.nii"
@@ -40,9 +40,9 @@
         },
         "numOfPCs": {
             "value": [
-                30,
-                30,
-                30
+                5,
+                5,
+                5
             ]
         },
         "univariate_test_list": {
@@ -180,7 +180,7 @@
             ]
         },
         "num_ics": {
-            "value":30
+            "value":5
         },
         "scica_template": {
             "value": "/computation/local_data/NeuroMark.nii"
@@ -205,9 +205,9 @@
         },
         "numOfPCs": {
             "value": [
-                30,
-                30,
-                30
+                5,
+                5,
+                5
             ]
         },
         "univariate_test_list": {
