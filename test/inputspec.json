@@ -2,8 +2,13 @@
     {
         "data": {
             "value": [
-                "sub-001_task-sbm_bold_prev.nii",
-                "site_1_sub-001_task-sbm_bold_prev_sec.nii"
+                "subject_1.nii",
+                "subject_2.nii",
+                "subject_3.nii",
+                "subject_4.nii",
+                "subject_5.nii",
+                "subject_6.nii"
+
             ]
         },
         "mask": {
@@ -167,7 +172,12 @@
     {
         "data": {
             "value": [
-                "sub-001_task-sbm_bold_prev.nii"
+                "subject_1.nii",
+                "subject_2.nii",
+                "subject_3.nii",
+                "subject_4.nii",
+                "subject_5.nii",
+                "subject_6.nii"
                 
             ]
         },
