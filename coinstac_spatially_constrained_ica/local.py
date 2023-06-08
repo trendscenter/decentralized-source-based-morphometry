@@ -42,6 +42,7 @@ def scica_local_1(args):
 
     load_loading_parameter = nib.load(os.path.join(args['state']['outputDirectory'], 'gica_cmd_group_loading_coeff_.nii'))
     loading_parameter = load_loading_parameter.affine;
+    ut.log("loading parameters shape: "+str(loading_parameter.shape), args["state"])
     #raise Exception(loading_parameter)
 
     # send files to transfer directory
@@ -55,14 +56,22 @@ def scica_local_1(args):
 
 
 
+    #computation_output = {
+    #    "output": {
+    #        "loading_parameter": 'loading_parameter.npy',
+    #        "computation_phase": "scica_local_1"
+    #    }
+    #}
+
     computation_output = {
-        "output": {
-            "loading_parameter": 'loading_parameter.npy',
-            "computation_phase": "scica_local_1"
-        }
+      "output": { 'loading_parameter': 'loading_parameter.npy','computation_phase': 'scica_local_1'},
+      "cache": {},
+      "state": state
     }
 
-    return json.dumps(computation_output)
+
+
+    return computation_output
 
 
     output_dict = {

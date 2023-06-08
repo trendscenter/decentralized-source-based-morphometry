@@ -16,8 +16,12 @@ import pandas as pd
 def scica_remote_noop(args):
 
     # concat the loading parameters from all sites
+    for site in args["input"]:
+        temp_lp=np.load(os.path.join(args["state"]["baseDirectory"], site, args["input"][site]["loading_parameter"]));
+        ut.log("Received loading parameters shape for site local-"+str(site)+" : "+str(temp_lp.shape), args["state"])
+
     concat_loading_parameters = np.vstack([np.load(os.path.join(args["state"]["baseDirectory"], site, args["input"][site]["loading_parameter"])) for site in args["input"]])
-    #ut.log("Stacked loading parameters shape: "+str(concat_loading_parameters.shape), args["state"])
+    ut.log("Stacked loading parameters shape: "+str(concat_loading_parameters.shape), args["state"])
 
     corr_dataframe = pd.DataFrame(concat_loading_parameters)
 
