@@ -41,7 +41,8 @@ def scica_local_1(args):
         )
 
     load_loading_parameter = nib.load(os.path.join(args['state']['outputDirectory'], 'gica_cmd_group_loading_coeff_.nii'))
-    loading_parameter = load_loading_parameter.affine;
+    loading_parameter = np.array(load_loading_parameter.dataobj)
+    
     ut.log("loading parameters shape: "+str(loading_parameter.shape), args["state"])
     #raise Exception(loading_parameter)
 
