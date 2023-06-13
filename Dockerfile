@@ -48,8 +48,6 @@ RUN mkdir -p /computation/mcrcache
 
 RUN mkdir /output
 
-COPY ./groupicatv4.0b /computation/groupicatv4.0b
-COPY ./groupicatv4.0b /app/groupicatv4.0b
 
 # Add a new version of GIFT 01/19/2023 Cyrus
 COPY ./groupica_git_012423 /computation/groupica_git_012423
