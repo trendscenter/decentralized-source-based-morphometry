@@ -1,10 +1,5 @@
-# Coinstac Group ICA Pipeline
+# Decentralized Constrained Source Based Morphometry (dcSBM) 
 
-This repository compiles submodules utilized for Group ICA, WITHOUT ddFNC as an option.
-
-This repository allows for decentralized group ICA, decentralized joint ICA, and decentralized auto-ICA (spatially constrained ICA). To cite the papers for each of these methods, please use the following reference:
-```
-```
 
 ## Running in the Simulator
 
@@ -20,7 +15,7 @@ npm i -g coinstac-simulator
 Download this repository
 
 ```
-git clone git@github.com:trendscenter/coinstac_gica_pipeline.git
+git clone https://github.com/trendscenter/decentralized-source-based-morphometry.git
 ```
 
 Initialize submodules
@@ -56,27 +51,3 @@ Run using the following commands
 sudo docker build  -t gica .
 sudo coinstac-simulator
 ```
-
-## Spatially Constrained ICA
-
-The stages of Spatially Constrained ICA are
-
- - local spatially constrained ICA (performed with GIFT)
-
-## Group ICA
-
-The stages of Group ICA are:
-
- - decentralized row means
- - decentralized PCA
- - local ICA (either with Infomax ICA, spatially-constrained ICA, or other)
-
-## Joint ICA
-
-The stages of Joint ICA are:
-
----
-
-## Linked Repositories/Submodules
-
-Briefly, there are a number of linked repositories attached to this pipeline.
