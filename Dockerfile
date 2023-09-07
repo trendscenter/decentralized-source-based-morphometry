@@ -48,10 +48,27 @@ RUN mkdir -p /computation/mcrcache
 
 RUN mkdir /output
 
+# Add new version of GIFT at 09/07/2023
+# GIFT version 4.0.4.11, including sliced masks still running on MATLAB 2016b
+RUN mkdir /computation/groupica_v4.0.4.11
+RUN wget -P /computation/groupica_v4.0.4.11 https://trends-public-website-fileshare.s3.amazonaws.com/public_website_files/software/gift/software/stand_alone/coinstac/082223/coinstac-giftv4.0.4.11_Lnx2016b/groupica
+RUN wget -P /computation/groupica_v4.0.4.11 https://trends-public-website-fileshare.s3.amazonaws.com/public_website_files/software/gift/software/stand_alone/coinstac/082223/coinstac-giftv4.0.4.11_Lnx2016b/run_groupica.sh
+RUN wget -P /computation/groupica_v4.0.4.11 https://trends-public-website-fileshare.s3.amazonaws.com/public_website_files/software/gift/software/stand_alone/coinstac/082223/coinstac-giftv4.0.4.11_Lnx2016b/requiredMCRProducts.txt
+RUN wget -P /computation/groupica_v4.0.4.11 https://trends-public-website-fileshare.s3.amazonaws.com/public_website_files/software/gift/software/stand_alone/coinstac/082223/coinstac-giftv4.0.4.11_Lnx2016b/readme.txt
+RUN wget -P /computation/groupica_v4.0.4.11 https://trends-public-website-fileshare.s3.amazonaws.com/public_website_files/software/gift/software/stand_alone/coinstac/082223/coinstac-giftv4.0.4.11_Lnx2016b/mccExcludedFiles.log
+
+RUN mkdir /app/groupica_v4.0.4.11
+RUN wget -P /app/groupica_v4.0.4.11 https://trends-public-website-fileshare.s3.amazonaws.com/public_website_files/software/gift/software/stand_alone/coinstac/082223/coinstac-giftv4.0.4.11_Lnx2016b/groupica
+RUN wget -P /app/groupica_v4.0.4.11 https://trends-public-website-fileshare.s3.amazonaws.com/public_website_files/software/gift/software/stand_alone/coinstac/082223/coinstac-giftv4.0.4.11_Lnx2016b/run_groupica.sh
+RUN wget -P /app/groupica_v4.0.4.11 https://trends-public-website-fileshare.s3.amazonaws.com/public_website_files/software/gift/software/stand_alone/coinstac/082223/coinstac-giftv4.0.4.11_Lnx2016b/requiredMCRProducts.txt
+RUN wget -P /app/groupica_v4.0.4.11 https://trends-public-website-fileshare.s3.amazonaws.com/public_website_files/software/gift/software/stand_alone/coinstac/082223/coinstac-giftv4.0.4.11_Lnx2016b/readme.txt
+RUN wget -P /app/groupica_v4.0.4.11 https://trends-public-website-fileshare.s3.amazonaws.com/public_website_files/software/gift/software/stand_alone/coinstac/082223/coinstac-giftv4.0.4.11_Lnx2016b/mccExcludedFiles.log
+
+# Remove 4 lines below if groupica v4.0.4.11 works
 
 # Add a new version of GIFT 01/19/2023 Cyrus
-COPY ./groupica_git_012423 /computation/groupica_git_012423
-COPY ./groupica_git_012423 /app/groupica_git_012423
+# COPY ./groupica_git_012423 /computation/groupica_git_012423
+# COPY ./groupica_git_012423 /app/groupica_git_012423
 
 RUN (timeout 20s /app/groupicatv4.0b/GroupICATv4.0b_standalone/run_groupica.sh /usr/local/MATLAB/MATLAB_Runtime/v91/; exit 0)
 

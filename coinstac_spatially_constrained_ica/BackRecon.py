@@ -18,7 +18,10 @@ DEFAULT_GROUP_ICA_TYPE = 'spatial'
 DEFAULT_WHICH_ANALYSIS = 1
 DEFAULT_MASK = ''
 
-matlab_cmd = '/computation/groupica_git_012423/run_groupica.sh /usr/local/MATLAB/MATLAB_Runtime/v91/'
+#matlab_cmd = '/computation/groupica_git_012423/run_groupica.sh /usr/local/MATLAB/MATLAB_Runtime/v91/'
+
+# Changed on 09/07/2023
+matlab_cmd = '/computation/groupica_v4.0.4.11/run_groupica.sh /usr/local/MATLAB/MATLAB_Runtime/v91/'
 
 '''
 def gift_gica(
