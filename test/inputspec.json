@@ -67,7 +67,7 @@
             "value": 5
         },
         "scica_template": {
-            "value": "/computation/local_data/NeuroMark.nii"
+            "value": "/computation/local_data/Neuromark_sMRI_1.0_modelorder-30_2x2x2.nii"
         },
         "covariates": {
             "value": "covariates.csv"
@@ -281,7 +281,7 @@
             "value":5
         },
         "scica_template": {
-            "value": "/computation/local_data/NeuroMark.nii"
+            "value": "/computation/local_data/Neuromark_sMRI_1.0_modelorder-30_2x2x2.nii"
         },
         "covariates": {
             "value": "covariates.csv"
