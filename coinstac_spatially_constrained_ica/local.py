@@ -24,7 +24,8 @@ def scica_local_1(args):
     
     #raise Exception(in_files[0])
     maskfile = os.path.join('/computation', 'local_data', 'mask.nii')
-    template = os.path.join('/computation', 'local_data', 'Neuromark_v01_sMRI_low_30.nii')
+    #template = os.path.join('/computation', 'local_data', 'Neuromark_v01_sMRI_low_30.nii')
+    template = os.path.join('/computation', 'local_data', 'Neuromark_sMRI_1.0_modelorder-30_2x2x2.nii')
     #template = ut.get_interpolated_nifti(in_files[0], template, destination_dir=state["outputDirectory"])
     pyscript = os.path.join(state["outputDirectory"], 'pyscript_gicacommand.m')
 
