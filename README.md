@@ -48,6 +48,6 @@ bash run.sh
 Run using the following commands
 
 ```
-sudo docker build  -t gica .
+sudo docker build  -t dsbm .
 sudo coinstac-simulator
 ```
