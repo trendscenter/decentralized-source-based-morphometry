@@ -1,55 +1,299 @@
 {
     "meta": {
-        "name": "decentralized SBM",
-        "id": "dsbm",
+        "name": "Decentralized Source Based Morphometry",
+        "id": "coinstac-dsbm",
         "version": "v1.0.0",
-        "repository": "",
-        "description": "a demo for decentralized ica"
+        "compspecVersion": 1,
+        "repository": "https://github.com/trendscenter/decentralized-source-based-morphometry",
+        "description": "A Demo for Decentralized Source Based Morphometry"
     },
     "computation": {
+        "display": {
+            "type": "iframe"
+        },
+        "input": {
+            "data": {
+                "label": "Data",
+                "type": "files",
+                "items": [
+                    "NiFTI"
+                ],
+                "extensions": [
+                    [
+                        "nii"
+                    ]
+                ],
+                "source": "member",
+                "order": 1
+            },
+            "mask": {
+                "group": "options",
+                "default": "average",
+                "label": "Mask",
+                "type": "string",
+                "source": "owner",
+                "order": 2
+            },
+            "ica_method": {
+                "group": "options",
+                "label": "Interactions",
+                "default": [
+                    "spatially constrained"
+                ],
+                "type": "object",
+                "source": "owner",
+                "order": 3
+            },
+            "num_ics": {
+                "group": "options",
+                "default": 5,
+                "label": "Global Number of Independent Components",
+                "min": 1,
+                "max": 100,
+                "type": "number",
+                "source": "owner",
+                "order": 4
+            },
+            "scica_template": {
+                "group": "options",
+                "default": "/computation/local_data/NeuroMark.nii",
+                "label": "Spatially Constrained ICA Template",
+                "type": "string",
+                "source": "owner",
+                "order": 5
+            },
+            "interactions": {
+                "group": "options",
+                "label": "Interactions",
+                "default": [],
+                "type": "object",
+                "source": "owner",
+                "order": 7
+            },
+            "features": {
+                "group": "options",
+                "label": "Features",
+                "default": [
+                    "fnc correlations",
+                    "timecourses spectra"
+                ],
+                "type": "object",
+                "source": "owner",
+                "order": 8
+            },
+            "TR": {
+                "group": "options",
+                "default": 2,
+                "label": "TR",
+                "type": "number",
+                "source": "owner",
+                "order": 9
+            },
+            "numOfPCs": {
+                "group": "options",
+                "type": "set",
+                "label": "Number of PCs",
+                "default": [
+                    5,
+                    5,
+                    5
+                ],
+                "source": "owner",
+                "order": 10
+            },
+            "univariate_test_list": {
+                "group": "options",
+                "type": "object",
+                "label": "Univariate Test List",
+                "default": [
+                    {
+                        "regression": {
+                            "gender": [
+                                "age"
+                            ],
+                            "age": [
+                                "gender"
+                            ]
+                        }
+                    }
+                ],
+                "source": "owner",
+                "order": 11
+            },
+            "t_threshold": {
+                "group": "options",
+                "type": "number",
+                "label": "T Threshold",
+                "default": 1,
+                "source": "owner",
+                "order": 12
+            },
+            "freq_limits": {
+                "group": "options",
+                "type": "set",
+                "label": "Frequency Limits",
+                "default": [
+                    0.1,
+                    0.15
+                ],
+                "source": "owner",
+                "order": 13
+            },
+            "p_threshold": {
+                "group": "options",
+                "type": "number",
+                "label": "P Threshold",
+                "default": 1,
+                "source": "owner",
+                "order": 14
+            },
+            "display_p_threshold": {
+                "group": "options",
+                "type": "number",
+                "label": "Display P Threshold",
+                "default": 1,
+                "source": "owner",
+                "order": 15
+            },
+            "comp_network_names": {
+                "group": "options",
+                "label": "Comp Network Names",
+                "default": {
+                    "SC": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5
+                    ],
+                    "AUD": [
+                        6,
+                        7
+                    ],
+                    "SM": [
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                        16
+                    ],
+                    "VIS": [
+                        17,
+                        18,
+                        19,
+                        20,
+                        21,
+                        22,
+                        23,
+                        24,
+                        25
+                    ],
+                    "CC": [
+                        26,
+                        27,
+                        28,
+                        29,
+                        30,
+                        31,
+                        32,
+                        33,
+                        34,
+                        35,
+                        36,
+                        37,
+                        38,
+                        39,
+                        40,
+                        41,
+                        42
+                    ],
+                    "DMN": [
+                        43,
+                        44,
+                        45,
+                        46,
+                        47,
+                        48,
+                        49
+                    ],
+                    "CR": [
+                        50,
+                        51,
+                        52,
+                        53
+                    ]
+                },
+                "type": "object",
+                "source": "owner",
+                "order": 16
+            },
+            "image_values": {
+                "group": "options",
+                "label": "Image Values",
+                "default": "positive",
+                "type": "string",
+                "source": "owner",
+                "order": 17
+            },
+            "threshdesc": {
+                "group": "options",
+                "type": "string",
+                "default": "none",
+                "label": "Threshdesc",
+                "source": "owner",
+                "order": 18
+            },
+            "gica_input_dir": {
+                "group": "options",
+                "type": "string",
+                "default": "",
+                "label": "GICA Input Directory",
+                "source": "owner",
+                "order": 19
+            },
+            "skip_gica": {
+                "group": "options",
+                "type": "boolean",
+                "default": false,
+                "label": "Skip Local GICA Step",
+                "source": "owner",
+                "order": 20
+            },
+            "run_mancova": {
+                "group": "options",
+                "type": "boolean",
+                "default": false,
+                "label": "Run Mancova",
+                "source": "owner",
+                "order": 21
+            },
+            "run_univariate_tests": {
+                "group": "options",
+                "type": "boolean",
+                "default": true,
+                "label": "Run Univariate Tests",
+                "source": "owner",
+                "order": 22
+            }
+        },
+        "output": {},
         "type": "docker",
-        "dockerImage": "dsbm",
+        "dockerImage": "coinstac-dsbm",
         "command": [
             "python",
-            "\/computation\/local.py"
+            "/computation/local.py"
         ],
         "remote": {
             "type": "docker",
-            "dockerImage": "dsbm",
+            "dockerImage": "coinstac-dsbm",
             "command": [
                 "python",
-                "\/computation\/remote.py"
+                "/computation/remote.py"
             ]
-        },
-        "input": {
-            "datafile": {
-                "label": "Input Data",
-                "type": "string",
-                "extensions": [
-                    [
-                        "csv"
-                    ]
-                ]
-            },
-            "mask": {
-                "defaultValue": "/computation/local_data/mask.nii",
-                "label": "Mask",
-                "type": "string",
-                "source": "owner"
-            },
-            "num_ics": {
-                "defaultValue": 20,
-                "label": "Global Number of Independent Components",
-                "min": 1,
-                "type": "number",
-                "source": "owner"
-            },
-            "scica_template": {
-                "defaultValue": "NeuroMark.nii",
-                "label": "Spatially Constrained ICA Template",
-                "type": "list/file"
-            }
-        },
-        "output": {}
+        }
     }
 }
