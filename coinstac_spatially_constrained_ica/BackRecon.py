@@ -6,7 +6,8 @@ DEFAULT_DIM = 30 #ce0118 was 100.  Should not be needed for constrained SBM
 DEFAULT_ALG = 15 # previously it was 16. Here 15 is GIGICA. The gift version is /computation/groupica_git_012423/run_groupica.sh 
 DEFAULT_ICA_PARAM_FILE = ''
 DEFAULT_OUT_DIR = '.'
-DEFAULT_DISPLAY_RESULTS = 0
+# Made changes on October 18, 2023
+DEFAULT_DISPLAY_RESULTS = 1
 DEFAULT_REFS = []
 DEFAULT_RUN_NAME = 'COINSTAC_SCICA'
 #DEFAULT_GROUP_PCA_TYPE = 0 # Should not be needed for constrained SBM
