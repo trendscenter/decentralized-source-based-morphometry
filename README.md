@@ -37,6 +37,14 @@ cp test/remote/simulatorRun/mask.nii test/local0/simulatorRun/ ;
 cp test/remote/simulatorRun/mask.nii test/local1/simulatorRun/ ;
 ```
 
+Input types
+```
+Data needs to be preprocessed
+Input files should be placed under the '/test/input/local_/simulatorRun/' directory
+The input can be provided either separately (a single Nifti file for each subject) or combined (concatenate all input files together) 
+There is no need to provide the covariate file
+```
+
 Finally, run using the bash script (will require entry of password for **sudo**)
 
 ```
@@ -51,3 +59,5 @@ Run using the following commands
 sudo docker build  -t dsbm .
 sudo coinstac-simulator
 ```
+
+
