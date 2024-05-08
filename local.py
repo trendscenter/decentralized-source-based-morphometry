@@ -29,12 +29,10 @@ from constants import OUTPUT_TEMPLATE
 
 
 LOCAL_SCICA_PHASES = \
-    pk.SPATIALLY_CONSTRAINED_ICA_LOCAL 
-if __name__ == '__main__':
-
+    pk.SPATIALLY_CONSTRAINED_ICA_LOCAL
+def start(parsed_args):
     PIPELINE = LOCAL_SCICA_PHASES
 
-    parsed_args = json.loads(sys.stdin.read())
     phase_key = list(ut.listRecursive(parsed_args, 'computation_phase'))
     computation_output = copy.deepcopy(OUTPUT_TEMPLATE)
     if not phase_key:
@@ -96,3 +94,8 @@ if __name__ == '__main__':
     ut.log("Computation output looks like %s, and output keys %s" %
            (str(computation_output), str(computation_output["output"].keys())), parsed_args["state"])
     sys.stdout.write(json.dumps(computation_output))
+
+
+if __name__ == '__main__':
+    parsed_args = json.loads(sys.stdin.read())
+    start(parsed_args)

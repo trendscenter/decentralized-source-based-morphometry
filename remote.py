@@ -32,10 +32,9 @@ from constants import OUTPUT_TEMPLATE
 REMOTE_SCICA_PHASES = \
     pk.SPATIALLY_CONSTRAINED_ICA_REMOTE
 
-if __name__ == '__main__':
-
+def start(parsed_args):
     PIPELINE = REMOTE_SCICA_PHASES
-    parsed_args = json.loads(sys.stdin.read())
+
     phase_key = list(ut.listRecursive(parsed_args, 'computation_phase'))
     computation_output = copy.deepcopy(OUTPUT_TEMPLATE)
     ut.log("Starting remote phase %s" % phase_key, parsed_args["state"])
@@ -95,3 +94,9 @@ if __name__ == '__main__':
            (str(computation_output.keys()), str(computation_output["output"].keys())), parsed_args["state"])
 
     sys.stdout.write(json.dumps(computation_output))
+
+
+if __name__ == '__main__':
+
+    parsed_args = json.loads(sys.stdin.read())
+    start(parsed_args)

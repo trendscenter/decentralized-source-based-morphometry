@@ -1,4 +1,5 @@
-FROM coinstacteam/coinstac-base:python3.7-buster
+#FROM coinstacteam/coinstac-base:python3.7-buster
+FROM python:3.10.8
 ENV MCRROOT=/usr/local/MATLAB/MATLAB_Runtime/v91
 ENV MCR_CACHE_ROOT=/tmp
 
@@ -27,7 +28,8 @@ COPY requirements.txt /app
 
 # Install any needed packages specified in requirements.txt
 #RUN pip install -r requirements.txt
-COPY ./groupicatv4.0b/icatb/nipype-0.10.0/nipype/interfaces/gift /usr/local/lib/python3.7/site-packages/nipype/interfaces/gift
+#COPY ./groupicatv4.0b/icatb/nipype-0.10.0/nipype/interfaces/gift /usr/local/lib/python3.7/site-packages/nipype/interfaces/gift
+COPY ./groupicatv4.0b/icatb/nipype-0.10.0/nipype/interfaces/gift /usr/local/lib/python3.10/site-packages/nipype/interfaces/gift
 RUN chmod -R a+wrx /app
 #RUN chmod -R a+wrx /usr/local/MATLAB/MATLAB_Runtime/v91
 
@@ -37,11 +39,14 @@ ENV MCR_CACHE_ROOT=/computation/mcrcache
 # Copy the current directory contents into the container
 WORKDIR /computation
 COPY requirements.txt /computation
+COPY coinstac_python_requirements.txt /computation
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --upgrade pip
+RUN pip install -r coinstac_python_requirements.txt
 RUN pip install -r requirements.txt
 RUN pip install awscli s3utils
+#RUN pip install nipy==0.5.0
 RUN pip install nipy
 
 RUN mkdir -p /computation/mcrcache
@@ -88,4 +93,4 @@ ENV PYTHONPATH=${PATH}:/computation
 COPY . /app
 #RUN (timeout 300 bash /app/groupicatv4.0b/GroupICATv4.0b_standalone/run_groupica.sh /usr/local/MATLAB/MATLAB_Runtime/v91; exit 0)
 
-
+CMD ["python", "/computation/entry.py"]
