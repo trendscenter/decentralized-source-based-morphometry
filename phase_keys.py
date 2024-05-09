@@ -170,13 +170,13 @@ INIT_REMOTE = [
 SPATIALLY_CONSTRAINED_ICA_LOCAL = [
     dict(
         do=[
-            scica_local.scica_local_1,
+            scica_local.scica_local_phases,
             #ops_local.local_output_to_cache,
             #ops_local.local_dump_cache_to_npy,
             #ops_local.local_clear_cache
         ],
         recv=[],
-        send='scica_local_1',
+        send='scica_local_XXXX',
         args=[
             [],
             [],
@@ -194,11 +194,10 @@ SPATIALLY_CONSTRAINED_ICA_LOCAL = [
 SPATIALLY_CONSTRAINED_ICA_REMOTE = [
     dict(
         do=[
-            scica_remote.scica_remote_noop,
-            ops_remote.remote_noop
+            scica_remote.scica_remote_phases,
         ],
         recv=SPATIALLY_CONSTRAINED_ICA_LOCAL[0].get('send'),
-        send='scica_remote_noop',
+        send='scica_remote_XXXX',
         args=[
             []
         ],

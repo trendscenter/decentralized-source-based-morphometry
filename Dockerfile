@@ -28,6 +28,7 @@ COPY requirements.txt /app
 # Install any needed packages specified in requirements.txt
 #RUN pip install -r requirements.txt
 COPY ./groupicatv4.0b/icatb/nipype-0.10.0/nipype/interfaces/gift /usr/local/lib/python3.7/site-packages/nipype/interfaces/gift
+
 RUN chmod -R a+wrx /app
 #RUN chmod -R a+wrx /usr/local/MATLAB/MATLAB_Runtime/v91
 
@@ -41,8 +42,6 @@ COPY requirements.txt /computation
 # Install any needed packages specified in requirements.txt
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
-RUN pip install awscli s3utils
-RUN pip install nipy
 
 RUN mkdir -p /computation/mcrcache
 
@@ -74,8 +73,8 @@ RUN (timeout 20s /app/groupicatv4.0b/GroupICATv4.0b_standalone/run_groupica.sh /
 
 COPY ./coinstac_masking /computation/coinstac_masking
 COPY ./coinstac_decentralized_row_means /computation/coinstac_decentralized_row_means
-
 COPY ./coinstac_node_ops /computation/coinstac_node_ops
+COPY ./coinstac_regression_vbm /computation/coinstac_regression_vbm
 COPY ./coinstac_spatially_constrained_ica /computation/coinstac_spatially_constrained_ica
 COPY ./local_data /computation/local_data
 

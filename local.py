@@ -28,13 +28,49 @@ import phase_keys as pk
 from constants import OUTPUT_TEMPLATE
 
 
-LOCAL_SCICA_PHASES = \
-    pk.SPATIALLY_CONSTRAINED_ICA_LOCAL 
-if __name__ == '__main__':
+LOCAL_SCICA_PHASES = pk.SPATIALLY_CONSTRAINED_ICA_LOCAL
 
-    PIPELINE = LOCAL_SCICA_PHASES
+def start_new(parsed_args):
+    PIPELINE = ut.update_computation_phases(parsed_args['state']['iteration'], LOCAL_SCICA_PHASES)
+    #Update
+    phase_key = list(ut.listRecursive(parsed_args, 'computation_phase'))
+    computation_output = copy.deepcopy(OUTPUT_TEMPLATE)
+    if not phase_key:
+        ut.log("***************************************", parsed_args["state"])
+    ut.log("Starting local phase %s" % phase_key, parsed_args["state"])
+    ut.log("With input %s" % str(parsed_args), parsed_args["state"])
+    for i, expected_phases in enumerate(PIPELINE):
+        ut.log("Expecting phase %s, Got phase %s" %
+               (expected_phases.get("recv"), phase_key), parsed_args["state"])
+        operations = expected_phases.get('do')
+        operation_args = expected_phases.get('args')
+        operation_kwargs = expected_phases.get('kwargs')
+        for operation, args, kwargs in zip(operations, operation_args, operation_kwargs):
+            if 'input' in parsed_args.keys():
+                ut.log('Operation %s is getting input with keys %s' %
+                       (operation.__name__, str(parsed_args['input'].keys())), parsed_args['state'])
+            else:
+                ut.log('Operation %s is not getting any input!' % operation.__name__, parsed_args['state'])
 
-    parsed_args = json.loads(sys.stdin.read())
+            ut.log("Trying operation %s, with args %s, and kwargs %s" %
+                   (operation.__name__, str(args), str(kwargs)), parsed_args["state"])
+            computation_output = operation(parsed_args,
+                                               *args,
+                                               **kwargs)
+            #parsed_args = copy.deepcopy(computation_output)
+            ut.log("Finished with operation %s" %
+                   (operation.__name__), parsed_args["state"])
+            ut.log("Operation output has keys %s" % str(computation_output['output'].keys()), parsed_args["state"])
+            break
+    ut.log("Computation output looks like %s, and output keys %s" %
+           (str(computation_output), str(computation_output["output"].keys())), parsed_args["state"])
+    sys.stdout.write(json.dumps(computation_output))
+    #return json.dumps(computation_output)
+
+
+def start_old(parsed_args):
+    PIPELINE = ut.update_computation_phases(parsed_args['state']['iteration'], LOCAL_SCICA_PHASES)
+    #Update
     phase_key = list(ut.listRecursive(parsed_args, 'computation_phase'))
     computation_output = copy.deepcopy(OUTPUT_TEMPLATE)
     if not phase_key:
@@ -96,3 +132,10 @@ if __name__ == '__main__':
     ut.log("Computation output looks like %s, and output keys %s" %
            (str(computation_output), str(computation_output["output"].keys())), parsed_args["state"])
     sys.stdout.write(json.dumps(computation_output))
+    #return json.dumps(computation_output)
+
+
+if __name__ == '__main__':
+    parsed_args = json.loads(sys.stdin.read())
+    #start_old(parsed_args)
+    start_new(parsed_args)
