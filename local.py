@@ -31,7 +31,7 @@ from constants import OUTPUT_TEMPLATE
 LOCAL_SCICA_PHASES = pk.SPATIALLY_CONSTRAINED_ICA_LOCAL
 
 def start_new(parsed_args):
-    PIPELINE = ut.update_computation_phases(parsed_args['state']['iteration'], LOCAL_SCICA_PHASES)
+    PIPELINE = LOCAL_SCICA_PHASES
     #Update
     phase_key = list(ut.listRecursive(parsed_args, 'computation_phase'))
     computation_output = copy.deepcopy(OUTPUT_TEMPLATE)
@@ -69,7 +69,7 @@ def start_new(parsed_args):
 
 
 def start_old(parsed_args):
-    PIPELINE = ut.update_computation_phases(parsed_args['state']['iteration'], LOCAL_SCICA_PHASES)
+    PIPELINE = LOCAL_SCICA_PHASES
     #Update
     phase_key = list(ut.listRecursive(parsed_args, 'computation_phase'))
     computation_output = copy.deepcopy(OUTPUT_TEMPLATE)

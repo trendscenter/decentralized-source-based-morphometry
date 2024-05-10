@@ -31,3 +31,15 @@ def print_rsquared(args, metric_data, metric_type, file_prefix=''):
     import numpy as np
     output_file = os.path.join(args["state"]["outputDirectory"], f'{metric_type}.csv')
     np.savetxt(output_file, metric_data, delimiter=",")
+
+def validate_file(args, filename, default_filename):
+    #If empty or None, use the default vale
+    if filename:
+        return default_filename
+    if os.path.isfile(filename):
+        return filename
+    if os.path.isfile(os.path.join(args['state']['baseDirectory'], filename)):
+        return os.path.join(args['state']['baseDirectory'], filename)
+    raise Exception(f'File {filename} does not exists. Please leave it blank or use the default value: "{default_filename}"')
+
+

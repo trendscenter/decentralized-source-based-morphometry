@@ -318,56 +318,8 @@
         "mask": {
             "value": "/computation/local_data/mask.nii"
         },
-        "ica_method": {
-            "value": [
-                "spatially constrained"
-            ]
-        },
-        "num_ics": {
-            "value": 5
-        },
         "scica_template": {
             "value": "/computation/local_data/Neuromark_sMRI_1.0_modelorder-30_2x2x2.nii"
-        },
-        "interactions": {
-            "value": []
-        },
-        "features": {
-            "value": [
-                "fnc correlations",
-                "timecourses spectra"
-            ]
-        },
-        "numOfPCs": {
-            "value": [
-                5,
-                5,
-                5
-            ]
-        },
-        "p_threshold": {
-            "value": 1.0
-        },
-        "display_p_threshold": {
-            "value": 1.0
-        },
-        "image_values": {
-            "value": "positive"
-        },
-        "threshdesc": {
-            "value": "none"
-        },
-        "gica_input_dir": {
-            "value": ""
-        },
-        "skip_gica":{
-            "value": false
-        },
-        "run_mancova": {
-            "value": false
-        },
-        "run_univariate_tests": {
-            "value": true
         }
     },
     {
@@ -689,53 +641,8 @@
         "mask": {
             "value": "/computation/local_data/mask.nii"
         },
-        "ica_method": {
-            "value": [
-                "spatially constrained"
-            ]
-        },
-        "num_ics": {
-            "value":5
-        },
         "scica_template": {
             "value": "/computation/local_data/Neuromark_sMRI_1.0_modelorder-30_2x2x2.nii"
-        },
-        "interactions": {
-            "value": []
-        },
-        "features": {
-            "value": [
-                "fnc correlations",
-                "timecourses spectra"
-            ]
-        },
-        "numOfPCs": {
-            "value": [
-                5,
-                5,
-                5
-            ]
-        },
-        "display_p_threshold": {
-            "value": 1.0
-        },
-        "image_values": {
-            "value": "positive"
-        },
-        "threshdesc": {
-            "value": "none"
-        },
-        "gica_input_dir": {
-            "value": ""
-        },
-        "skip_gica":{
-            "value": false
-        },
-        "run_mancova": {
-            "value": false
-        },
-        "run_univariate_tests": {
-            "value": true
         }
     }
 ]

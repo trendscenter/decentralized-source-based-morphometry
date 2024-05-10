@@ -34,22 +34,24 @@ def scica_local_0(args):
 
     in_files = [os.path.join(state['baseDirectory'], f) for f in covar_x.index]
     
-    #raise Exception(in_files[0])
-    maskfile = os.path.join('/computation', 'local_data', 'mask.nii')
-    #template = os.path.join('/computation', 'local_data', 'Neuromark_v01_sMRI_low_30.nii')
-    template = os.path.join('/computation', 'local_data', 'Neuromark_sMRI_1.0_modelorder-30_2x2x2.nii')
-    #template = ut.get_interpolated_nifti(in_files[0], template, destination_dir=state["outputDirectory"])
+    maskfile = anc.validate_file(args, args["input"]["mask"],
+                               os.path.join('/computation', 'local_data', 'mask.nii'))
+
+    scica_template = anc.validate_file(args, args["input"]["scica_template"],
+                                      os.path.join('/computation', 'local_data', 'Neuromark_sMRI_1.0_modelorder-30_2x2x2.nii'))
+
     pyscript = os.path.join(state["outputDirectory"], 'pyscript_gicacommand.m')
 
     if os.path.exists(pyscript):
         os.remove(pyscript)
     output = gift_gica(
             in_files=in_files,
-            refFiles=[template],
+            refFiles=[scica_template],
             mask=maskfile,
             out_dir=state["outputDirectory"],
         )
-    load_loading_parameter = nib.load(os.path.join(args['state']['outputDirectory'], 'gica_cmd_group_loading_coeff_.nii'))
+    load_loading_parameter = nib.load(os.path.join(args['state']['outputDirectory'],
+                                                   'gica_cmd_group_loading_coeff_.nii'))
     loading_parameter = np.array(load_loading_parameter.dataobj)
     
     ut.log("loading parameters shape: "+str(loading_parameter.shape), args["state"])
@@ -132,6 +134,7 @@ def scica_local_1(args):
 
     anc.print_beta_vectors(args, local_beta, "beta_vector_local", local_X_labels)
     anc.print_rsquared(args, local_r_squared, "r_squared_local")
+    local_stats_list = sorted(os.listdir(args["state"]["outputDirectory"]))
 
     # Global Statistics
     augmented_X = reg_vbm_loc_anc.add_site_covariates(args, X)
