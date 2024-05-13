@@ -8,5 +8,11 @@ nibabel==2.3.3
 setuptools==40.6.3
 scikit_learn==0.20.3
 theano==1.0.4
-h5py
-hdfdict
+h5py==3.8.0
+hdfdict==0.3.1
+awscli==1.31.13 
+s3utils==0.6.1
+nipy==0.5.0
+statsmodels==0.11.1
+numba==0.53.1
+jsonpickle==2.2.0

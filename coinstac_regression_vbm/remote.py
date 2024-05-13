@@ -1,64 +1,46 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
-Created on Mon March 6 2023
-
-@author: Debbrata Saha
+This script includes the remote computations for decentralized
+regression with decentralized statistic calculation
 """
-
-import sys
 import os
 import shutil
-import ujson as json
-import jsonpickle
-import utils as ut
+import sys
+import warnings
+
 import numpy as np
-from scipy import stats
-import matplotlib.pyplot as plt
 import pandas as pd
 
-from . import ancillary as anc
+#import simplejson as json
+import jsonpickle
 
-sys.path.append("../..")
-from coinstac_regression_vbm import remote_ancillary as reg_vbm_rem_anc
-from coinstac_regression_vbm import ancillary as reg_vbm_anc
-from coinstac_regression_vbm import rw_utils as reg_vbm_rw_ut
+from ancillary import (
+    encode_png,
+    loadBin,
+    print_beta_images,
+    print_pvals,
+    print_r2_image,
+    saveBin,
+)
+from nipype_utils import calculate_mask
+from remote_ancillary import remote_stats, return_uniques_and_counts
+from rw_utils import read_file
+from scipy import stats
+from utils import list_recursive, log
 
-def scica_remote_0(args):
+warnings.simplefilter("ignore")
+OUTPUT_FROM_LOCAL = "local_output"
 
-    # concat the loading parameters from all sites
-    for site in args["input"]:
-        temp_lp=np.load(os.path.join(args["state"]["baseDirectory"], site, args["input"][site]["loading_parameter"]));
-        ut.log("Received loading parameters shape for site local-"+str(site)+" : "+str(temp_lp.shape), args["state"])
 
-    concat_loading_parameters = np.vstack([np.load(os.path.join(args["state"]["baseDirectory"], site, args["input"][site]["loading_parameter"])) for site in args["input"]])
-    ut.log("Stacked loading parameters shape: "+str(concat_loading_parameters.shape), args["state"])
-
-    corr_dataframe = pd.DataFrame(concat_loading_parameters)
-
-    # compute the correlation 
-    corr_matrix = corr_dataframe.corr(method='pearson')
-
-    #ut.log("Computed correlation matrix ", args["state"])
-
-    # plot correlation matrix
-    plt.imshow(corr_matrix, cmap='hot')
-    plt.title('Correlation Map')
-    c = plt.colorbar()
-    plt.clim(-1, 1)
-
-    #ut.log("plotting correlation matrix ", args["state"])
-    # save figure and send to each local site
-    plt.savefig(os.path.join(args['state']['outputDirectory'],'global_loading_correlation_map.png'))
-    plt.savefig(os.path.join(args['state']['transferDirectory'], 'global_loading_correlation_map.png'))
-
-    ut.log("saving correlation matrix plots in output and transfer dirs", args["state"])
-
-    #Perform regression logic
-
+def remote_0(args):
+    """The first function in the remote computation chain"""
+    calculate_mask(args)
     input_ = args["input"]
     site_info = {site: input_[site]["categorical_dict"] for site in input_.keys()}
     ref_cols = {site: input_[site]["reference_columns"] for site in input_.keys()}
-    ut.log("args received to remote_0 : "+str(args), args["state"])
-    ut.log("Reference columns received for dummy encoding: "+ str(ref_cols), args["state"] )
+    log("args received to remote_0 : "+str(args), args["state"])
+    log("Reference columns received for dummy encoding: "+ str(ref_cols), args["state"] )
 
     reference_dict=next(iter(ref_cols.values()))
     # assert that reference columns/values for dummy encoding are same across all the sites for
@@ -67,30 +49,23 @@ def scica_remote_0(args):
         "Reference values for dummy encoding are not same across all the sites "+ str(ref_cols)
 
     df = pd.DataFrame.from_dict(site_info)
-    covar_keys, unique_count = reg_vbm_rem_anc.return_uniques_and_counts(df)
+    covar_keys, unique_count = return_uniques_and_counts(df)
 
-    output_dict= {
-        "final_embedding" : 0,
-        "file_name" : 'sample_fig.png',
-        "covar_keys": jsonpickle.encode(covar_keys, unpicklable=False),
-        "reference_columns": reference_dict,
-        "global_unique_count": unique_count,
-        "computation_phase": "scica_remote_0",
-    }
-
-    computation_output = {
-        "output": output_dict,
+    computation_output_dict = {
+        "output": {
+            "covar_keys": jsonpickle.encode(covar_keys, unpicklable=False),
+            "reference_columns": reference_dict,
+            "global_unique_count": unique_count,
+            "mask": "mask.nii",
+            "computation_phase": "remote_0",
+        },
         "cache": {},
-        "state": args["state"]
     }
 
-    anc.chmod_dir_recursive(args['state']["transferDirectory"])
-    anc.chmod_dir_recursive(args['state']["outputDirectory"])
-
-    return computation_output
+    return computation_output_dict
 
 
-def scica_remote_1(args):
+def remote_1(args):
     """The second function in the local computation chain"""
     input_ = args["input"]
     state_ = args["state"]
@@ -103,8 +78,8 @@ def scica_remote_1(args):
     input_list = dict()
 
     for site in site_list:
-        file_name = os.path.join(input_dir, site, "local_output")
-        input_list[site] = reg_vbm_rw_ut.read_file(args, "input", file_name)
+        file_name = os.path.join(input_dir, site, OUTPUT_FROM_LOCAL)
+        input_list[site] = read_file(args, "input", file_name)
 
     X_labels = input_list[user_id]["X_labels"]
 
@@ -114,7 +89,7 @@ def scica_remote_1(args):
 
     beta_vector_0 = sum(
         [
-            reg_vbm_anc.loadBin(
+            loadBin(
                 os.path.join(input_dir, site, input_list[site]["XtransposeX_local"])
             )
             for site in input_list
@@ -123,19 +98,24 @@ def scica_remote_1(args):
 
     beta_vector_1 = sum(
         [
-            reg_vbm_anc.loadBin(
+            loadBin(
                 os.path.join(input_dir, site, input_list[site]["Xtransposey_local"])
             )
             for site in input_list
         ]
     )
 
+    all_lambdas = [input_list[site]["lambda"] for site in input_list]
+
+    if np.unique(all_lambdas).shape[0] != 1:
+        raise Exception("Unequal lambdas at local sites")
+
     try:
         avg_beta_vector = np.transpose(
             np.dot(np.linalg.inv(beta_vector_0), beta_vector_1)
         )
     except np.linalg.LinAlgError:
-        cond = np.linalg.cond(beta_vector_0.T @ beta_vector_0);
+        cond = np.linalg.cond(X.T @ X);
         raise Exception(f"X.^T*X matrix at remote is Singular with condition number: {cond}")
 
     mean_y_local = [input_list[site]["mean_y_local"] for site in input_list]
@@ -145,16 +125,16 @@ def scica_remote_1(args):
 
     dof_global = sum(count_y_local) - avg_beta_vector.shape[1]
 
-    reg_vbm_anc.saveBin(
+    saveBin(
         os.path.join(args["state"]["transferDirectory"], "avg_beta_vector.npy"),
         avg_beta_vector,
     )
-    reg_vbm_anc.saveBin(
+    saveBin(
         os.path.join(args["state"]["transferDirectory"], "mean_y_global.npy"),
         mean_y_global,
     )
 
-    reg_vbm_anc.saveBin(
+    saveBin(
         os.path.join(args["state"]["cacheDirectory"], "avg_beta_vector.npy"),
         avg_beta_vector,
     )
@@ -162,7 +142,7 @@ def scica_remote_1(args):
     output_dict = {
         "avg_beta_vector": "avg_beta_vector.npy",
         "mean_y_global": "mean_y_global.npy",
-        "computation_phase": "scica_remote_1",
+        "computation_phase": "remote_1",
     }
 
     cache_dict = {
@@ -178,14 +158,49 @@ def scica_remote_1(args):
     with open(file_name, "w") as file_h:
         input_list[site] = json.dump(cache_dict, file_h)
 
-    anc.chmod_dir_recursive(args['state']["transferDirectory"])
-    anc.chmod_dir_recursive(args['state']["outputDirectory"])
-
     return computation_output_dict
 
 
-def scica_remote_2(args):
+def remote_2(args):
+    """
+    Computes the global model fit statistics, r_2_global, ts_global, ps_global
 
+    Args:
+        args (dictionary): {"input": {
+                                "SSE_local": ,
+                                "SST_local": ,
+                                "varX_matrix_local": ,
+                                "computation_phase":
+                                },
+                            "cache":{},
+                            }
+
+    Returns:
+        computation_output (json) : {"output": {
+                                        "avg_beta_vector": ,
+                                        "beta_vector_local": ,
+                                        "r_2_global": ,
+                                        "ts_global": ,
+                                        "ps_global": ,
+                                        "dof_global":
+                                        },
+                                    "success":
+                                    }
+    Comments:
+        Generate the local fit statistics
+            r^2 : goodness of fit/coefficient of determination
+                    Given as 1 - (SSE/SST)
+                    where   SSE = Sum Squared of Errors
+                            SST = Total Sum of Squares
+            t   : t-statistic is the coefficient divided by its standard error.
+                    Given as beta/std.err(beta)
+            p   : two-tailed p-value (The p-value is the probability of
+                  seeing a result as extreme as the one you are
+                  getting (a t value as large as yours)
+                  in a collection of random data in which
+                  the variable had no effect.)
+
+    """
     cache_ = args["cache"]
     state_ = args["state"]
     input_dir = state_["baseDirectory"]
@@ -194,17 +209,17 @@ def scica_remote_2(args):
     input_list = dict()
     site_list = args["input"].keys()
     for site in site_list:
-        file_name = os.path.join(input_dir, site, "local_output")
+        file_name = os.path.join(input_dir, site, OUTPUT_FROM_LOCAL)
         with open(file_name, "r") as file_h:
             input_list[site] = json.load(file_h)
 
-    cache_list = reg_vbm_rw_ut.read_file(args, "cache", "remote_cache")
+    cache_list = read_file(args, "cache", "remote_cache")
 
     X_labels = args["cache"]["X_labels"]
 
     all_local_stats_dicts = cache_["local_stats_dict"]
 
-    avg_beta_vector = reg_vbm_anc.loadBin(os.path.join(cache_dir, cache_list["avg_beta_vector"]))
+    avg_beta_vector = loadBin(os.path.join(cache_dir, cache_list["avg_beta_vector"]))
     dof_global = cache_list["dof_global"]
 
     SSE_global = sum([np.array(input_list[site]["SSE_local"]) for site in input_list])
@@ -215,21 +230,12 @@ def scica_remote_2(args):
 
     r_squared_global = 1 - (SSE_global / SST_global)
     MSE = SSE_global / np.array(dof_global)
-    ts_global = reg_vbm_rem_anc.remote_stats(MSE, varX_matrix_global, avg_beta_vector)
+    ts_global = remote_stats(MSE, varX_matrix_global, avg_beta_vector)
     ps_global = [2 * stats.t.sf(np.abs(t), df) for t, df in zip(ts_global, dof_global)]
 
-    ut.log(f'ts-global shape" : {str(np.shape(ts_global))}', args["state"])
-    ut.log(f'ps-global shape" : {str(np.shape(ps_global))}', args["state"])
-    ut.log(f'MSE-global shape" : {str(MSE)}', args["state"])
-    ut.log(f'ps-global shape" : {str(r_squared_global)}', args["state"])
-
-    #TODO save output files
-    #print_pvals(args, ps_global, ts_global, X_labels)
-    #print_beta_images(args, avg_beta_vector, X_labels)
-    #print_r2_image(args, r_squared_global)
-
-    anc.print_beta_vectors(args, avg_beta_vector, "beta_vector_global", X_labels)
-    anc.print_rsquared(args, r_squared_global, "r_squared_global")
+    print_pvals(args, ps_global, ts_global, X_labels)
+    print_beta_images(args, avg_beta_vector, X_labels)
+    print_r2_image(args, r_squared_global)
 
     # Block of code to print local stats as well
     sites = [site for site in input_list]
@@ -242,19 +248,19 @@ def scica_remote_2(args):
     # move global stats to transfer directory to be moved to local sites
     os.mkdir(os.path.join(state_["transferDirectory"], "global_stats"))
     for f in global_files:
-        shutil.copy(
+        shutil.move(
             os.path.join(state_["outputDirectory"], f),
             os.path.join(state_["transferDirectory"], "global_stats", f),
         )
 
     # Get list of global pngs files
     global_png_files = [
-        f"global_stats/{file}" for file in global_files if file.endswith(".png") or file.endswith(".csv")
+        f"global_stats/{file}" for file in global_files if file.endswith(".png")
     ]
 
     # Get list of local png files
     local_png_files = {
-        site: [file for file in site_files if file.endswith(".png") or file.endswith(".csv")]
+        site: [file for file in site_files if file.endswith(".png")]
         for site, site_files in all_local_stats_dicts.items()
     }
 
@@ -263,27 +269,18 @@ def scica_remote_2(args):
 
     computation_output_dict = {"output": output_dict, "success": True}
 
-    anc.chmod_dir_recursive(args['state']["transferDirectory"])
-    anc.chmod_dir_recursive(args['state']["outputDirectory"])
-
     return computation_output_dict
 
 
-def scica_remote_phases(parsed_args):
+def start(PARAM_DICT):
+    PHASE_KEY = list(list_recursive(PARAM_DICT, "computation_phase"))
 
-    phase_key = list(ut.listRecursive(parsed_args, 'computation_phase'))
-    
-    ut.log("\nReceived phase key : "+str(phase_key), parsed_args["state"])
-    if 'scica_local_0' in phase_key:
-        return scica_remote_0(parsed_args)
-    elif "scica_local_1" in phase_key:
-        return scica_remote_1(parsed_args)
-    elif "scica_local_2" in phase_key:
-        return scica_remote_2(parsed_args)
+    if "local_0" in PHASE_KEY:
+        return remote_0(PARAM_DICT)
+    elif "local_1" in PHASE_KEY:
+        return remote_1(PARAM_DICT)
+    elif "local_2" in PHASE_KEY:
+        return remote_2(PARAM_DICT)
     else:
-        raise ValueError("Error occurred at Local")
+        raise ValueError("Error occurred at Remote")
 
-
-if __name__ == '__main__':
-    parsed_args = json.loads(sys.stdin.read())
-    scica_remote_phases(parsed_args)
