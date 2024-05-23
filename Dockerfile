@@ -59,8 +59,6 @@ RUN wget -P /computation/groupica_v4.0.4.11 https://trends-public-website-filesh
 
 RUN (timeout 20s /computation/groupica_v4.0.4.11/run_groupica.sh /usr/local/MATLAB/MATLAB_Runtime/v91/; exit 0)
 
-COPY ./coinstac_masking /computation/coinstac_masking
-COPY ./coinstac_decentralized_row_means /computation/coinstac_decentralized_row_means
 COPY ./coinstac_node_ops /computation/coinstac_node_ops
 COPY ./coinstac_regression_vbm /computation/coinstac_regression_vbm
 COPY ./coinstac_spatially_constrained_ica /computation/coinstac_spatially_constrained_ica
