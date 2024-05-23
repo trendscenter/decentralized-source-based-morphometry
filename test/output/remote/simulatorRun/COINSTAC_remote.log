@@ -1,8 +1,0 @@
-Starting remote phase ['scica_local_1', 'scica_local_1']
-With input dict_keys(['input', 'cache', 'state']), and input keys dict_keys(['local0', 'local1'])
-Operation remote_noop is getting input with keys dict_keys(['local0', 'local1'])
-Trying operation remote_noop, with args, and kwargs
-Finished with operation remote_noop
-Operation output is dict_keys(['input', 'output', 'state', 'cache']), output keys dict_keys(['computation_phase'])
-Finished with phase scica_remote_noop
-Computation output looks like dict_keys(['input', 'output', 'state', 'cache', 'success']), and output keys dict_keys(['computation_phase'])
