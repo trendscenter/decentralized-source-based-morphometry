@@ -74,14 +74,14 @@
         },
         "output": {},
         "type": "docker",
-        "dockerImage": "coinstac-dsbm",
+        "dockerImage": "coinstacteam/coinstac-dsbm",
         "command": [
             "python",
             "/computation/local.py"
         ],
         "remote": {
             "type": "docker",
-            "dockerImage": "coinstac-dsbm",
+            "dockerImage": "coinstacteam/coinstac-dsbm",
             "command": [
                 "python",
                 "/computation/remote.py"
