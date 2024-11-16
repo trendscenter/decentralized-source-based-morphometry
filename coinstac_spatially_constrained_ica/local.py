@@ -31,10 +31,7 @@ def scica_local_0(args):
     cache_dir = state["cacheDirectory"]
 
     # Load covariates
-    try:
-        categorical_dict, covar_x = reg_vbm_par.parse_for_categorical(args)
-    except Exception:
-        throw(args);
+    categorical_dict, covar_x = reg_vbm_par.parse_for_categorical(args)
 
     in_files = [os.path.join(state['baseDirectory'], f) for f in covar_x.index]
     

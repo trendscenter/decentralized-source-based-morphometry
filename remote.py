@@ -64,8 +64,9 @@ def start(parsed_args):
     ut.log("Computation output looks like %s, and output keys %s" %
            (str(computation_output.keys()), str(computation_output["output"].keys())), parsed_args["state"])
 
-    sys.stdout.write(json.dumps(computation_output))
+    #sys.stdout.write(json.dumps(computation_output))
     #return json.dumps(computation_output)
+    return computation_output
 
 
 
