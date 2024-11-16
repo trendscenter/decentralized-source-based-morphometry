@@ -29,12 +29,48 @@ import phase_keys as pk
 from constants import OUTPUT_TEMPLATE
 
 
-REMOTE_SCICA_PHASES = \
-    pk.SPATIALLY_CONSTRAINED_ICA_REMOTE
+REMOTE_SCICA_PHASES = pk.SPATIALLY_CONSTRAINED_ICA_REMOTE
 
 def start(parsed_args):
     PIPELINE = REMOTE_SCICA_PHASES
 
+    phase_key = list(ut.listRecursive(parsed_args, 'computation_phase'))
+    computation_output = copy.deepcopy(OUTPUT_TEMPLATE)
+    ut.log("Starting remote phase %s" % phase_key, parsed_args["state"])
+    ut.log("With input %s, and input keys %s" %
+           (str(parsed_args.keys()), str(parsed_args['input'].keys())), parsed_args["state"])
+
+    for i, expected_phases in enumerate(PIPELINE):
+            operations = expected_phases.get('do')
+            operation_args = expected_phases.get('args')
+            operation_kwargs = expected_phases.get('kwargs')
+            for operation, args, kwargs in zip(operations, operation_args, operation_kwargs):
+                if 'input' in parsed_args.keys():
+                    ut.log('Operation %s is getting input with keys %s' %
+                           (operation.__name__, str(parsed_args['input'].keys())), parsed_args['state'])
+                else:
+                    ut.log('Operation %s is not getting any input!' % operation.__name__, parsed_args['state'])
+
+                ut.log("Trying operation %s, with args, and kwargs" %
+                       (operation.__name__), parsed_args["state"])
+                computation_output = operation(parsed_args,
+                                               *args,
+                                               **kwargs)
+                ut.log("Finished with operation %s" %
+                       (operation.__name__), parsed_args["state"])
+                ut.log("Operation output is %s, output keys %s" %
+                       (str(computation_output.keys()), str(computation_output['output'].keys())), parsed_args["state"])
+            break
+    ut.log("Computation output looks like %s, and output keys %s" %
+           (str(computation_output.keys()), str(computation_output["output"].keys())), parsed_args["state"])
+
+    sys.stdout.write(json.dumps(computation_output))
+    #return json.dumps(computation_output)
+
+
+
+def start_old(parsed_args):
+    PIPELINE = REMOTE_SCICA_PHASES
     phase_key = list(ut.listRecursive(parsed_args, 'computation_phase'))
     computation_output = copy.deepcopy(OUTPUT_TEMPLATE)
     ut.log("Starting remote phase %s" % phase_key, parsed_args["state"])
@@ -83,6 +119,7 @@ def start(parsed_args):
                 ut.log("Operation output is %s, output keys %s" %
                        (str(parsed_args.keys()), str(parsed_args['output'].keys())), parsed_args["state"])
             if i+1 == len(PIPELINE):
+                ut.log("Appending success", parsed_args["state"])
                 computation_output["success"] = True
             if expected_phases.get('send'):
                 computation_output["output"]["computation_phase"] = expected_phases.get(
@@ -94,7 +131,7 @@ def start(parsed_args):
            (str(computation_output.keys()), str(computation_output["output"].keys())), parsed_args["state"])
 
     sys.stdout.write(json.dumps(computation_output))
-
+    #return json.dumps(computation_output)
 
 if __name__ == '__main__':
 

@@ -28,268 +28,60 @@
             },
             "mask": {
                 "group": "options",
-                "default": "average",
-                "label": "Mask",
+                "default": "/computation/local_data/mask.nii",
+                "label": "Mask Filename",
                 "type": "string",
                 "source": "owner",
+                "tooltip": "Nifti file name to be use as the mask",
                 "order": 2
-            },
-            "ica_method": {
-                "group": "options",
-                "label": "Interactions",
-                "default": [
-                    "spatially constrained"
-                ],
-                "type": "object",
-                "source": "owner",
-                "order": 3
-            },
-            "num_ics": {
-                "group": "options",
-                "default": 5,
-                "label": "Global Number of Independent Components",
-                "min": 1,
-                "max": 100,
-                "type": "number",
-                "source": "owner",
-                "order": 4
             },
             "scica_template": {
                 "group": "options",
                 "default": "/computation/local_data/NeuroMark.nii",
-                "label": "Spatially Constrained ICA Template",
+                "label": "Spatially Constrained ICA Template Name",
                 "type": "string",
                 "source": "owner",
+                "tooltip": "Nifti file name to be use as the template for spatially constrained ICA",
+                "order": 3
+            },
+            "covariates": {
+                "group": "reg",
+                "label": "Covariates",
+                "type": "csv",
+                "items": ["boolean", "number", "string"],
+                "source": "member",
+                "tooltip": "csv file with nifti file name, covariates information of each subject in a separate line",
+                 "order": 4
+            },
+            "reference_columns": {
+                "group": "reg",
+                "label": "Regression reference column(s) and value(s)",
+                "default": {},
+                "type": "object",
+                "source": "owner",
+                "tooltip": "Used in regression for dummy encoding categorical covariate columns. Required only if specific value(s) should be used for dummy encoding a column(s); Example : { \"reference_column_name\": \"reference_value\" }",
                 "order": 5
             },
-            "interactions": {
-                "group": "options",
-                "label": "Interactions",
-                "default": [],
-                "type": "object",
-                "source": "owner",
-                "order": 7
-            },
-            "features": {
-                "group": "options",
-                "label": "Features",
-                "default": [
-                    "fnc correlations",
-                    "timecourses spectra"
-                ],
-                "type": "object",
-                "source": "owner",
-                "order": 8
-            },
-            "TR": {
-                "group": "options",
-                "default": 2,
-                "label": "TR",
-                "type": "number",
-                "source": "owner",
-                "order": 9
-            },
-            "numOfPCs": {
-                "group": "options",
-                "type": "set",
-                "label": "Number of PCs",
-                "default": [
-                    5,
-                    5,
-                    5
-                ],
-                "source": "owner",
-                "order": 10
-            },
-            "univariate_test_list": {
-                "group": "options",
-                "type": "object",
-                "label": "Univariate Test List",
-                "default": [
-                    {
-                        "regression": {
-                            "gender": [
-                                "age"
-                            ],
-                            "age": [
-                                "gender"
-                            ]
-                        }
-                    }
-                ],
-                "source": "owner",
-                "order": 11
-            },
-            "t_threshold": {
-                "group": "options",
-                "type": "number",
-                "label": "T Threshold",
-                "default": 1,
-                "source": "owner",
-                "order": 12
-            },
-            "freq_limits": {
-                "group": "options",
-                "type": "set",
-                "label": "Frequency Limits",
-                "default": [
-                    0.1,
-                    0.15
-                ],
-                "source": "owner",
-                "order": 13
-            },
-            "p_threshold": {
-                "group": "options",
-                "type": "number",
-                "label": "P Threshold",
-                "default": 1,
-                "source": "owner",
-                "order": 14
-            },
-            "display_p_threshold": {
-                "group": "options",
-                "type": "number",
-                "label": "Display P Threshold",
-                "default": 1,
-                "source": "owner",
-                "order": 15
-            },
-            "comp_network_names": {
-                "group": "options",
-                "label": "Comp Network Names",
-                "default": {
-                    "SC": [
-                        1,
-                        2,
-                        3,
-                        4,
-                        5
-                    ],
-                    "AUD": [
-                        6,
-                        7
-                    ],
-                    "SM": [
-                        8,
-                        9,
-                        10,
-                        11,
-                        12,
-                        13,
-                        14,
-                        15,
-                        16
-                    ],
-                    "VIS": [
-                        17,
-                        18,
-                        19,
-                        20,
-                        21,
-                        22,
-                        23,
-                        24,
-                        25
-                    ],
-                    "CC": [
-                        26,
-                        27,
-                        28,
-                        29,
-                        30,
-                        31,
-                        32,
-                        33,
-                        34,
-                        35,
-                        36,
-                        37,
-                        38,
-                        39,
-                        40,
-                        41,
-                        42
-                    ],
-                    "DMN": [
-                        43,
-                        44,
-                        45,
-                        46,
-                        47,
-                        48,
-                        49
-                    ],
-                    "CR": [
-                        50,
-                        51,
-                        52,
-                        53
-                    ]
-                },
-                "type": "object",
-                "source": "owner",
-                "order": 16
-            },
-            "image_values": {
-                "group": "options",
-                "label": "Image Values",
-                "default": "positive",
-                "type": "string",
-                "source": "owner",
-                "order": 17
-            },
-            "threshdesc": {
-                "group": "options",
-                "type": "string",
-                "default": "none",
-                "label": "Threshdesc",
-                "source": "owner",
-                "order": 18
-            },
-            "gica_input_dir": {
-                "group": "options",
-                "type": "string",
+            "group_col_name": {
+                "group": "reg",
+                "label": "Patient/Control column name",
                 "default": "",
-                "label": "GICA Input Directory",
+                "type": "string",
                 "source": "owner",
-                "order": 19
-            },
-            "skip_gica": {
-                "group": "options",
-                "type": "boolean",
-                "default": false,
-                "label": "Skip Local GICA Step",
-                "source": "owner",
-                "order": 20
-            },
-            "run_mancova": {
-                "group": "options",
-                "type": "boolean",
-                "default": false,
-                "label": "Run Mancova",
-                "source": "owner",
-                "order": 21
-            },
-            "run_univariate_tests": {
-                "group": "options",
-                "type": "boolean",
-                "default": true,
-                "label": "Run Univariate Tests",
-                "source": "owner",
-                "order": 22
+                "tooltip": "Column name in the covariates file that contains patients and controls information.",
+                "order": 5
             }
         },
         "output": {},
         "type": "docker",
-        "dockerImage": "coinstac-dsbm",
+        "dockerImage": "coinstacteam/coinstac-dsbm",
         "command": [
             "python",
             "/computation/local.py"
         ],
         "remote": {
             "type": "docker",
-            "dockerImage": "coinstac-dsbm",
+            "dockerImage": "coinstacteam/coinstac-dsbm",
             "command": [
                 "python",
                 "/computation/remote.py"
