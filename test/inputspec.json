@@ -24,6 +24,294 @@
                 "age": 39,
                 "site": "IA",
                 "sex": "M"
+              },
+              "sub_3.nii": {
+                "isControl": true,
+                "age": 23,
+                "site": "IA",
+                "sex": "M"
+              },
+              "sub_4.nii": {
+                "isControl": true,
+                "age": 20,
+                "site": "IA",
+                "sex": "F"
+              },
+              "sub_5.nii": {
+                "isControl": true,
+                "age": 41,
+                "site": "IA",
+                "sex": "M"
+              },
+              "sub_6.nii": {
+                "isControl": true,
+                "age": 26,
+                "site": "IA",
+                "sex": "M"
+              },
+              "sub_7.nii": {
+                "isControl": true,
+                "age": 35,
+                "site": "IA",
+                "sex": "F"
+              },
+              "sub_8.nii": {
+                "isControl": true,
+                "age": 41,
+                "site": "IA",
+                "sex": "F"
+              },
+              "sub_9.nii": {
+                "isControl": true,
+                "age": 47,
+                "site": "IA",
+                "sex": "M"
+              },
+              "sub_10.nii": {
+                "isControl": true,
+                "age": 55,
+                "site": "IA",
+                "sex": "F"
+              },
+              "sub_11.nii": {
+                "isControl": true,
+                "age": 41,
+                "site": "IA",
+                "sex": "M"
+              },
+              "sub_12.nii": {
+                "isControl": true,
+                "age": 45,
+                "site": "IA",
+                "sex": "F"
+              },
+              "sub_13.nii": {
+                "isControl": true,
+                "age": 46,
+                "site": "IA",
+                "sex": "M"
+              },
+              "sub_14.nii": {
+                "isControl": true,
+                "age": 35,
+                "site": "IA",
+                "sex": "M"
+              },
+              "sub_15.nii": {
+                "isControl": true,
+                "age": 50,
+                "site": "IA",
+                "sex": "M"
+              },
+              "sub_16.nii": {
+                "isControl": true,
+                "age": 25,
+                "site": "IA",
+                "sex": "M"
+              },
+              "sub_17.nii": {
+                "isControl": true,
+                "age": 44,
+                "site": "IA",
+                "sex": "M"
+              },
+              "sub_18.nii": {
+                "isControl": true,
+                "age": 50,
+                "site": "IA",
+                "sex": "F"
+              },
+              "sub_19.nii": {
+                "isControl": true,
+                "age": 34,
+                "site": "IA",
+                "sex": "M"
+              },
+              "sub_20.nii": {
+                "isControl": true,
+                "age": 46,
+                "site": "IA",
+                "sex": "M"
+              },
+              "sub_21.nii": {
+                "isControl": true,
+                "age": 21,
+                "site": "IA",
+                "sex": "F"
+              },
+              "sub_22.nii": {
+                "isControl": true,
+                "age": 27,
+                "site": "IA",
+                "sex": "M"
+              },
+              "sub_23.nii": {
+                "isControl": true,
+                "age": 48,
+                "site": "IA",
+                "sex": "M"
+              },
+              "sub_24.nii": {
+                "isControl": true,
+                "age": 39,
+                "site": "IA",
+                "sex": "M"
+              },
+              "sub_25.nii": {
+                "isControl": true,
+                "age": 39,
+                "site": "IA",
+                "sex": "F"
+              },
+              "sub_26.nii": {
+                "isControl": true,
+                "age": 34,
+                "site": "IA",
+                "sex": "M"
+              },
+              "sub_27.nii": {
+                "isControl": true,
+                "age": 42,
+                "site": "IA",
+                "sex": "M"
+              },
+              "sub_28.nii": {
+                "isControl": true,
+                "age": 20,
+                "site": "IA",
+                "sex": "F"
+              },
+              "sub_29.nii": {
+                "isControl": true,
+                "age": 49,
+                "site": "IA",
+                "sex": "M"
+              },
+              "sub_30.nii": {
+                "isControl": true,
+                "age": 45,
+                "site": "IA",
+                "sex": "M"
+              },
+              "sub_31.nii": {
+                "isControl": true,
+                "age": 37,
+                "site": "IA",
+                "sex": "F"
+              },
+              "sub_32.nii": {
+                "isControl": true,
+                "age": 22,
+                "site": "IA",
+                "sex": "M"
+              },
+              "sub_33.nii": {
+                "isControl": false,
+                "age": 46,
+                "site": "IA",
+                "sex": "F"
+              },
+              "sub_34.nii": {
+                "isControl": false,
+                "age": 50,
+                "site": "IA",
+                "sex": "M"
+              },
+              "sub_35.nii": {
+                "isControl": false,
+                "age": 35,
+                "site": "IA",
+                "sex": "M"
+              },
+              "sub_36.nii": {
+                "isControl": false,
+                "age": 50,
+                "site": "IA",
+                "sex": "F"
+              },
+              "sub_37.nii": {
+                "isControl": false,
+                "age": 22,
+                "site": "IA",
+                "sex": "F"
+              },
+              "sub_38.nii": {
+                "isControl": false,
+                "age": 46,
+                "site": "IA",
+                "sex": "M"
+              },
+              "sub_39.nii": {
+                "isControl": false,
+                "age": 25,
+                "site": "IA",
+                "sex": "F"
+              },
+              "sub_40.nii": {
+                "isControl": false,
+                "age": 47,
+                "site": "IA",
+                "sex": "M"
+              },
+              "sub_41.nii": {
+                "isControl": false,
+                "age": 46,
+                "site": "IA",
+                "sex": "M"
+              },
+              "sub_42.nii": {
+                "isControl": false,
+                "age": 37,
+                "site": "IA",
+                "sex": "M"
+              },
+              "sub_43.nii": {
+                "isControl": false,
+                "age": 23,
+                "site": "IA",
+                "sex": "M"
+              },
+              "sub_44.nii": {
+                "isControl": false,
+                "age": 46,
+                "site": "IA",
+                "sex": "M"
+              },
+              "sub_45.nii": {
+                "isControl": false,
+                "age": 41,
+                "site": "IA",
+                "sex": "M"
+              },
+              "sub_46.nii": {
+                "isControl": false,
+                "age": 43,
+                "site": "IA",
+                "sex": "M"
+              },
+              "sub_47.nii": {
+                "isControl": false,
+                "age": 39,
+                "site": "IA",
+                "sex": "F"
+              },
+              "sub_48.nii": {
+                "isControl": false,
+                "age": 43,
+                "site": "IA",
+                "sex": "F"
+              },
+              "sub_49.nii": {
+                "isControl": false,
+                "age": 20,
+                "site": "IA",
+                "sex": "F"
+              },
+              "sub_50.nii": {
+                "isControl": false,
+                "age": 36,
+                "site": "IA",
+                "sex": "M"
               }
             }
   },
@@ -57,6 +345,294 @@
               "sub_2.nii": {
                 "isControl": true,
                 "age": 39,
+                "site": "MGH",
+                "sex": "M"
+              },
+              "sub_3.nii": {
+                "isControl": true,
+                "age": 23,
+                "site": "MGH",
+                "sex": "M"
+              },
+              "sub_4.nii": {
+                "isControl": true,
+                "age": 20,
+                "site": "MGH",
+                "sex": "F"
+              },
+              "sub_5.nii": {
+                "isControl": true,
+                "age": 41,
+                "site": "MGH",
+                "sex": "M"
+              },
+              "sub_6.nii": {
+                "isControl": true,
+                "age": 26,
+                "site": "MGH",
+                "sex": "M"
+              },
+              "sub_7.nii": {
+                "isControl": true,
+                "age": 35,
+                "site": "MGH",
+                "sex": "F"
+              },
+              "sub_8.nii": {
+                "isControl": true,
+                "age": 41,
+                "site": "MGH",
+                "sex": "F"
+              },
+              "sub_9.nii": {
+                "isControl": true,
+                "age": 47,
+                "site": "MGH",
+                "sex": "M"
+              },
+              "sub_10.nii": {
+                "isControl": true,
+                "age": 55,
+                "site": "MGH",
+                "sex": "F"
+              },
+              "sub_11.nii": {
+                "isControl": true,
+                "age": 41,
+                "site": "MGH",
+                "sex": "M"
+              },
+              "sub_12.nii": {
+                "isControl": true,
+                "age": 45,
+                "site": "MGH",
+                "sex": "F"
+              },
+              "sub_13.nii": {
+                "isControl": true,
+                "age": 46,
+                "site": "MGH",
+                "sex": "M"
+              },
+              "sub_14.nii": {
+                "isControl": true,
+                "age": 35,
+                "site": "MGH",
+                "sex": "M"
+              },
+              "sub_15.nii": {
+                "isControl": true,
+                "age": 50,
+                "site": "MGH",
+                "sex": "M"
+              },
+              "sub_16.nii": {
+                "isControl": true,
+                "age": 25,
+                "site": "MGH",
+                "sex": "M"
+              },
+              "sub_17.nii": {
+                "isControl": true,
+                "age": 44,
+                "site": "MGH",
+                "sex": "M"
+              },
+              "sub_18.nii": {
+                "isControl": true,
+                "age": 50,
+                "site": "MGH",
+                "sex": "F"
+              },
+              "sub_19.nii": {
+                "isControl": true,
+                "age": 34,
+                "site": "MGH",
+                "sex": "M"
+              },
+              "sub_20.nii": {
+                "isControl": true,
+                "age": 46,
+                "site": "MGH",
+                "sex": "M"
+              },
+              "sub_21.nii": {
+                "isControl": true,
+                "age": 21,
+                "site": "MGH",
+                "sex": "F"
+              },
+              "sub_22.nii": {
+                "isControl": true,
+                "age": 27,
+                "site": "MGH",
+                "sex": "M"
+              },
+              "sub_23.nii": {
+                "isControl": true,
+                "age": 48,
+                "site": "MGH",
+                "sex": "M"
+              },
+              "sub_24.nii": {
+                "isControl": true,
+                "age": 39,
+                "site": "MGH",
+                "sex": "M"
+              },
+              "sub_25.nii": {
+                "isControl": true,
+                "age": 39,
+                "site": "MGH",
+                "sex": "F"
+              },
+              "sub_26.nii": {
+                "isControl": true,
+                "age": 34,
+                "site": "MGH",
+                "sex": "M"
+              },
+              "sub_27.nii": {
+                "isControl": true,
+                "age": 42,
+                "site": "MGH",
+                "sex": "M"
+              },
+              "sub_28.nii": {
+                "isControl": true,
+                "age": 20,
+                "site": "MGH",
+                "sex": "F"
+              },
+              "sub_29.nii": {
+                "isControl": true,
+                "age": 49,
+                "site": "MGH",
+                "sex": "M"
+              },
+              "sub_30.nii": {
+                "isControl": true,
+                "age": 45,
+                "site": "MGH",
+                "sex": "M"
+              },
+              "sub_31.nii": {
+                "isControl": true,
+                "age": 37,
+                "site": "MGH",
+                "sex": "F"
+              },
+              "sub_32.nii": {
+                "isControl": true,
+                "age": 22,
+                "site": "MGH",
+                "sex": "M"
+              },
+              "sub_33.nii": {
+                "isControl": false,
+                "age": 46,
+                "site": "MGH",
+                "sex": "F"
+              },
+              "sub_34.nii": {
+                "isControl": false,
+                "age": 50,
+                "site": "MGH",
+                "sex": "M"
+              },
+              "sub_35.nii": {
+                "isControl": false,
+                "age": 35,
+                "site": "MGH",
+                "sex": "M"
+              },
+              "sub_36.nii": {
+                "isControl": false,
+                "age": 50,
+                "site": "MGH",
+                "sex": "F"
+              },
+              "sub_37.nii": {
+                "isControl": false,
+                "age": 22,
+                "site": "MGH",
+                "sex": "F"
+              },
+              "sub_38.nii": {
+                "isControl": false,
+                "age": 46,
+                "site": "MGH",
+                "sex": "M"
+              },
+              "sub_39.nii": {
+                "isControl": false,
+                "age": 25,
+                "site": "MGH",
+                "sex": "F"
+              },
+              "sub_40.nii": {
+                "isControl": false,
+                "age": 47,
+                "site": "MGH",
+                "sex": "M"
+              },
+              "sub_41.nii": {
+                "isControl": false,
+                "age": 46,
+                "site": "MGH",
+                "sex": "M"
+              },
+              "sub_42.nii": {
+                "isControl": false,
+                "age": 37,
+                "site": "MGH",
+                "sex": "M"
+              },
+              "sub_43.nii": {
+                "isControl": false,
+                "age": 23,
+                "site": "MGH",
+                "sex": "M"
+              },
+              "sub_44.nii": {
+                "isControl": false,
+                "age": 46,
+                "site": "MGH",
+                "sex": "M"
+              },
+              "sub_45.nii": {
+                "isControl": false,
+                "age": 41,
+                "site": "MGH",
+                "sex": "M"
+              },
+              "sub_46.nii": {
+                "isControl": false,
+                "age": 43,
+                "site": "MGH",
+                "sex": "M"
+              },
+              "sub_47.nii": {
+                "isControl": false,
+                "age": 39,
+                "site": "MGH",
+                "sex": "F"
+              },
+              "sub_48.nii": {
+                "isControl": false,
+                "age": 43,
+                "site": "MGH",
+                "sex": "F"
+              },
+              "sub_49.nii": {
+                "isControl": false,
+                "age": 20,
+                "site": "MGH",
+                "sex": "F"
+              },
+              "sub_50.nii": {
+                "isControl": false,
+                "age": 36,
                 "site": "MGH",
                 "sex": "M"
               }
