@@ -4,9 +4,6 @@
 # Sets up the MATLAB Runtime environment for the current $ARCH and executes 
 # the specified command.
 #
-echo "start" >> /output/t.t
-echo "$@" >> /output/t.t
-
 exe_name=$0
 exe_dir=`dirname "$0"`
 echo "------------------------------------------"
@@ -30,7 +27,6 @@ else
       args="${args} \"${token}\"" 
       shift
   done
-  echo "\"${exe_dir}/groupica\" $args" >> /output/t.t
   eval "\"${exe_dir}/groupica\"" $args
 fi
 exit
