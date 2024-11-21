@@ -28,91 +28,18 @@ ENV GICA_INSTALL_DIR=/computation/groupica_v4.0.4.11
 # Building entrypoint
 WORKDIR /computation
 RUN chmod +x /computation/groupica_v4.0.4.11/groupica
-#ENTRYPOINT ["/app/run.sh"]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#FROM --platform=linux/amd64 python:3.8-slim
-#ENV MCRROOT=/usr/local/MATLAB/MATLAB_Runtime/v91
-#ENV MCR_CACHE_ROOT=/tmp
-
-#RUN apt-get clean && apt-get update && apt-get install -y \
-#    zip unzip wget \
-#    libx11-dev libxcomposite-dev \
-#    libxcursor-dev libxdamage-dev libxext-dev \
-#    libxfixes-dev libxft-dev libxi-dev \
-#    libxrandr-dev libxt-dev libxtst-dev \
-#    libxxf86vm-dev libasound2-dev libatk1.0-dev \
-#    libcairo2-dev gconf2 \
-#    libsndfile1-dev libxcb1-dev libxslt-dev \
-#    curl \
-#    libgtk-3-dev \ 
-#    build-essential \
-#    libatlas-base-dev \
-#    liblapack-dev \
-#    gfortran \
-#    && rm -rf /var/lib/apt/lists/*
-
-#RUN mkdir /tmp/mcr_installer && \
-#    cd /tmp/mcr_installer && \
-#    wget http://ssd.mathworks.com/supportfiles/downloads/R2016b/deployment_files/R2016b/installers/glnxa64/MCR_R2016b_glnxa64_installer.zip && \
-#    unzip MCR_R2016b_glnxa64_installer.zip && \
-#    ./install -mode silent -agreeToLicense yes && \
-#    rm -Rf /tmp/mcr_installer
-
-# Copy the current directory contents into the container
-#WORKDIR /app
-#COPY requirements.txt /app
 
 # Install any needed packages specified in requirements.txt
-#RUN pip install -r requirements.txt
 COPY ./groupicatv4.0b/icatb/nipype-0.10.0/nipype/interfaces/gift /usr/local/lib/python3.8/site-packages/nipype/interfaces/gift
 
-#RUN chmod -R a+wrx /app
-#RUN chmod -R a+wrx /usr/local/MATLAB/MATLAB_Runtime/v91
-
-#ENV MCRROOT=/usr/local/MATLAB/MATLAB_Runtime/v91
-#ENV MCR_CACHE_ROOT=/computation/mcrcache
-
 # Copy the current directory contents into the container
-#WORKDIR /computation
-#COPY requirements.txt /computation
 COPY coinstac_python_requirements.txt /computation
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --upgrade pip
 RUN pip install -r coinstac_python_requirements.txt
-#RUN pip install -r requirements.txt
-#RUN pip install awscli s3utils
-#RUN pip install nipy==0.5.0
-#RUN pip install -U numpy
-#RUN pip install nipy
-
-#RUN mkdir -p /computation/mcrcache
-
-#RUN mkdir /output
-
-# Add new version of GIFT at 09/07/2023
-# GIFT version 4.0.4.11, including sliced masks still running on MATLAB 2016b
-#RUN wget -P /computation/groupica_v4.0.4.11 https://trends-public-website-fileshare.s3.amazonaws.com/public_website_files/software/gift/software/stand_alone/coinstac/082223/coinstac-giftv4.0.4.11_Lnx2016b/groupica
-#RUN wget -P /computation/groupica_v4.0.4.11 https://trends-public-website-fileshare.s3.amazonaws.com/public_website_files/software/gift/software/stand_alone/coinstac/082223/coinstac-giftv4.0.4.11_Lnx2016b/run_groupica.sh
-#RUN wget -P /computation/groupica_v4.0.4.11 https://trends-public-website-fileshare.s3.amazonaws.com/public_website_files/software/gift/software/stand_alone/coinstac/082223/coinstac-giftv4.0.4.11_Lnx2016b/requiredMCRProducts.txt
-#RUN wget -P /computation/groupica_v4.0.4.11 https://trends-public-website-fileshare.s3.amazonaws.com/public_website_files/software/gift/software/stand_alone/coinstac/082223/coinstac-giftv4.0.4.11_Lnx2016b/readme.txt
-#RUN wget -P /computation/groupica_v4.0.4.11 https://trends-public-website-fileshare.s3.amazonaws.com/public_website_files/software/gift/software/stand_alone/coinstac/082223/coinstac-giftv4.0.4.11_Lnx2016b/mccExcludedFiles.log
 
 COPY ./run_groupica.sh /computation/groupica_v4.0.4.11/
-#RUN (timeout 20s /computation/groupica_v4.0.4.11/run_groupica.sh /usr/local/MATLAB/MATLAB_Runtime/v91/; exit 0)
 
 COPY ./coinstac_node_ops /computation/coinstac_node_ops
 COPY ./coinstac_regression_vbm /computation/coinstac_regression_vbm

@@ -81,7 +81,6 @@ def gift_gica(
 
 
     """
-    ut.log("22222222222222222222222222222222222222222", state)
     gift.GICACommand.set_mlab_paths(matlab_cmd=matlab_cmd, use_mcr=True)
 
     gc = gift.GICACommand()
@@ -107,9 +106,7 @@ def gift_gica(
     gc.inputs.out_dir = out_dir
     output = {}
     
-    ut.log("222222222222222222222222222222222222222223", state)
     output = gc.run()
-    ut.log("222222222222222222222222222222222222222224", state)
     
     
     return output

@@ -27,7 +27,6 @@ loading_parameters = 'gica_cmd_group_loading_coeff_.nii'
 
 def scica_local_0(args):
     state = args["state"]
-    ut.log("11111111111111111111111111111111111 ", state)
     cache_dir = state["cacheDirectory"]
 
     # Load covariates
@@ -37,17 +36,14 @@ def scica_local_0(args):
     
     maskfile = anc.validate_file(args, args["input"]["mask"],
                                os.path.join('/computation', 'local_data', 'mask.nii'))
-    ut.log("111111111111111111111111111111111112 ", state)
 
     scica_template = anc.validate_file(args, args["input"]["scica_template"],
                                       os.path.join('/computation', 'local_data', 'Neuromark_sMRI_1.0_modelorder-30_2x2x2.nii'))
 
     pyscript = os.path.join(state["outputDirectory"], 'pyscript_gicacommand.m')
-    ut.log("111111111111111111111111111111111113 ", state)
 
     if os.path.exists(pyscript):
         os.remove(pyscript)
-    ut.log("1111111111111111111111111111111111133 ", state)
     output = gift_gica(
             in_files=in_files,
             refFiles=[scica_template],
@@ -55,10 +51,8 @@ def scica_local_0(args):
             out_dir=state["outputDirectory"],
             state=state,
         )
-    ut.log("111111111111111111111111111111111114 ", state)
     load_loading_parameter = nib.load(os.path.join(args['state']['outputDirectory'],
                                                    'gica_cmd_group_loading_coeff_.nii'))
-    ut.log("111111111111111111111111111111111115 ", state)
     loading_parameter = np.array(load_loading_parameter.dataobj)
     
     ut.log("loading parameters shape: "+str(loading_parameter.shape), args["state"])
