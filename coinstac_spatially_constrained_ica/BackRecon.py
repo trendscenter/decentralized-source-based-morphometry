@@ -1,4 +1,5 @@
 import os
+import utils as ut
 from nipype.interfaces import gift
 
 # GICA DEFAULTS
@@ -22,7 +23,7 @@ DEFAULT_MASK = ''
 #matlab_cmd = '/computation/groupica_git_012423/run_groupica.sh /usr/local/MATLAB/MATLAB_Runtime/v91/'
 
 # Changed on 09/07/2023
-matlab_cmd = '/computation/groupica_v4.0.4.11/run_groupica.sh /usr/local/MATLAB/MATLAB_Runtime/v91/'
+matlab_cmd = '/computation/groupica_v4.0.4.11/run_groupica.sh /usr/local/MATLAB/MATLAB_Runtime/R2022b/'
 
 '''
 def gift_gica(
@@ -40,7 +41,7 @@ def gift_gica(
     run_name=DEFAULT_RUN_NAME, out_dir=DEFAULT_OUT_DIR, 
     scaleType=DEFAULT_SCALE_TYPE,
     display_results=DEFAULT_DISPLAY_RESULTS,
-    which_analysis=DEFAULT_WHICH_ANALYSIS, mask=DEFAULT_MASK
+    which_analysis=DEFAULT_WHICH_ANALYSIS, mask=DEFAULT_MASK, state={}
 ):
  
     """
@@ -94,7 +95,8 @@ def gift_gica(
     # gc.inputs.group_ica_type = group_ica_type #removed due to constr sbm
     gc.inputs.which_analysis = which_analysis
     gc.inputs.refFiles = refFiles
-    gc.inputs.display_results = display_results
+    #gc.inputs.display_results = display_results
+    gc.inputs.display_results = 0
     gc.inputs.mask = mask
     #gc.inputs.df = 5 # Should not be needed for constrained SBM
 

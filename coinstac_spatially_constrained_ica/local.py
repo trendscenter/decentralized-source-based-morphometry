@@ -49,6 +49,7 @@ def scica_local_0(args):
             refFiles=[scica_template],
             mask=maskfile,
             out_dir=state["outputDirectory"],
+            state=state,
         )
     load_loading_parameter = nib.load(os.path.join(args['state']['outputDirectory'],
                                                    'gica_cmd_group_loading_coeff_.nii'))

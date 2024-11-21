@@ -3,7 +3,7 @@
         "name": "Decentralized Source Based Morphometry",
         "id": "coinstac-dsbm",
         "version": "v1.0.0",
-        "compspecVersion": 1,
+        "compspecVersion": 2,
         "repository": "https://github.com/trendscenter/decentralized-source-based-morphometry",
         "description": "A Demo for Decentralized Source Based Morphometry"
     },
