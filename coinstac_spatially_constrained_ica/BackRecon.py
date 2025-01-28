@@ -99,6 +99,8 @@ def gift_gica(
     gc.inputs.display_results = 0
     gc.inputs.mask = mask
     #gc.inputs.df = 5 # Should not be needed for constrained SBM
+    gc.inputs.perfType = 2 # memory efficient
+
 
     if dim > 0:
         gc.inputs.dim = dim
