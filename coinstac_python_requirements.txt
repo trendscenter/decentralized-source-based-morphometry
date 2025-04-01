@@ -37,7 +37,7 @@ statsmodels==0.13.5
 threadpoolctl==3.1.0
 urllib3==1.26.14
 websockets==10.4
-
+traits==4.6.0
 nipype==1.1.7
 theano==1.0.4
 h5py==2.10.0
