@@ -95,8 +95,8 @@ def gift_gica(
     # gc.inputs.group_ica_type = group_ica_type #removed due to constr sbm
     gc.inputs.which_analysis = which_analysis
     gc.inputs.refFiles = refFiles
-    #gc.inputs.display_results = display_results
-    gc.inputs.display_results = 0
+    gc.inputs.display_results = display_results
+    #gc.inputs.display_results = 0
     gc.inputs.mask = mask
     #gc.inputs.df = 5 # Should not be needed for constrained SBM
     gc.inputs.perfType = 2 # memory efficient

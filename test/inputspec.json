@@ -318,8 +318,17 @@
         "mask": {
             "value": "/computation/local_data/mask.nii"
         },
+
         "scica_template": {
             "value": "/computation/local_data/Neuromark_sMRI_1.0_modelorder-30_2x2x2.nii"
+        },
+        "subsample_nifti_images": {
+          "fulfilled": true,
+          "value": false 
+        },
+        "voxel_size": {
+          "fulfilled": true,
+          "value": 4
         }
     },
     {
@@ -643,6 +652,14 @@
         },
         "scica_template": {
             "value": "/computation/local_data/Neuromark_sMRI_1.0_modelorder-30_2x2x2.nii"
+        },
+        "subsample_nifti_images": {
+          "fulfilled": true,
+          "value": false 
+        },
+        "voxel_size": {
+          "fulfilled": true,
+          "value": 4
         }
     }
 ]

@@ -40,7 +40,7 @@ def scica_remote_0(args):
     #ut.log("Computed correlation matrix ", args["state"])
 
     # plot correlation matrix
-    plt.imshow(corr_matrix, cmap='hot')
+    plt.imshow(corr_matrix, cmap='jet')
     plt.title('Correlation Map')
     c = plt.colorbar()
     plt.clim(-1, 1)

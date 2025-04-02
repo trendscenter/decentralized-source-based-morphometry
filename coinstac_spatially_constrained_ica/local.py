@@ -24,16 +24,27 @@ from coinstac_regression_vbm import rw_utils as reg_vbm_rw_ut
 
 loading_parameters = 'gica_cmd_group_loading_coeff_.nii'
 
-
 def scica_local_0(args):
     state = args["state"]
     cache_dir = state["cacheDirectory"]
 
     # Load covariates
     categorical_dict, covar_x = reg_vbm_par.parse_for_categorical(args)
+    images_input_dir = state['baseDirectory']
 
-    in_files = [os.path.join(state['baseDirectory'], f) for f in covar_x.index]
-    
+    #subsample images
+    subsample_nifti_images = args["input"]["subsample_nifti_images"]
+    if subsample_nifti_images :
+        voxel_subsampling_size = int(args["input"]["voxel_size"])
+        if voxel_subsampling_size > 0:
+            subsampled_images_dir=os.path.join(state["outputDirectory"], f"subsampled_voxel_size_{str(voxel_subsampling_size)}")
+            anc.subsample_images(images_input_dir, covar_x.index.tolist(), voxel_subsampling_size, subsampled_images_dir)
+            in_files =[os.path.join(subsampled_images_dir, f) for f in covar_x.index]
+        else:
+            raise (f"Please provide a valid voxel size for subsampling. current value: {voxel_subsampling_size}")
+    else:
+        in_files = [os.path.join(images_input_dir, f) for f in covar_x.index]
+
     maskfile = anc.validate_file(args, args["input"]["mask"],
                                os.path.join('/computation', 'local_data', 'mask.nii'))
 
@@ -44,6 +55,7 @@ def scica_local_0(args):
 
     if os.path.exists(pyscript):
         os.remove(pyscript)
+
     output = gift_gica(
             in_files=in_files,
             refFiles=[scica_template],
