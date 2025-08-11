@@ -99,7 +99,7 @@ def local_stats_to_dict_numba(args, X, y):
 
     local_stats_list = sorted(os.listdir(args["state"]["outputDirectory"]))
 
-    return beta_vector, local_stats_list, rsquared, X_labels
+    return beta_vector, local_stats_list, rsquared, pvalues, tvalues, X_labels
 
 
 def local_stats_to_dict(X, y):

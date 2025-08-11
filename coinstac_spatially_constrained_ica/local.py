@@ -134,18 +134,19 @@ def scica_local_1(args):
 
     ut.log("args received to local_1 : "+str(args), state_)
     # Local Statistics
-    #encoded_X, y = reg_vbm_loc_anc . vbm_parser(args, X) #Replaced this with the below 2 lines
-
     encoded_X = reg_vbm_par.perform_encoding(args, X)
     y = np.load(os.path.join(cache_dir, cache_["loading_parameter"]));
 
     meanY_vector, lenY_vector = reg_vbm_loc_anc.mean_and_len_y(y)
-    local_beta, local_stats_list, local_r_squared, local_X_labels = reg_vbm_loc_anc.local_stats_to_dict_numba(args, encoded_X, y)
+    local_beta, local_stats_list, local_r_squared, local_pvalues, local_tvalues, local_X_labels = reg_vbm_loc_anc.local_stats_to_dict_numba(args, encoded_X, y)
     ut.log(f'local_stats_list: {str(local_stats_list)}', state_)
     ut.log(f'beta_shape: {local_beta} ', state_)
     ut.log(f'r_squared: {local_r_squared}', state_)
+    ut.log(f'p_values: {local_pvalues}', state_)
+    ut.log(f't_values: {local_tvalues}', state_)
 
     anc.print_beta_vectors(args, local_beta, "beta_vector_local", local_X_labels)
+    anc.print_p_values(args, local_pvalues.T, local_tvalues.T, "p_val_local", local_X_labels)
     anc.print_rsquared(args, local_r_squared, "r_squared_local")
     local_stats_list = sorted(os.listdir(args["state"]["outputDirectory"]))
 

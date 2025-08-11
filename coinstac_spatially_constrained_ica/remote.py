@@ -216,7 +216,7 @@ def scica_remote_2(args):
     r_squared_global = 1 - (SSE_global / SST_global)
     MSE = SSE_global / np.array(dof_global)
     ts_global = reg_vbm_rem_anc.remote_stats(MSE, varX_matrix_global, avg_beta_vector)
-    ps_global = [2 * stats.t.sf(np.abs(t), df) for t, df in zip(ts_global, dof_global)]
+    ps_global = np.asarray([2 * stats.t.sf(np.abs(t), df) for t, df in zip(ts_global, dof_global)])
 
     ut.log(f'ts-global shape" : {str(np.shape(ts_global))}', args["state"])
     ut.log(f'ps-global shape" : {str(np.shape(ps_global))}', args["state"])
@@ -229,6 +229,7 @@ def scica_remote_2(args):
     #print_r2_image(args, r_squared_global)
 
     anc.print_beta_vectors(args, avg_beta_vector, "beta_vector_global", X_labels)
+    anc.print_p_values(args, ps_global, ts_global, "p_val_global", X_labels)
     anc.print_rsquared(args, r_squared_global, "r_squared_global")
 
     # Block of code to print local stats as well

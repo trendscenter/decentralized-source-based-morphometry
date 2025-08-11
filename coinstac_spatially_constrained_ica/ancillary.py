@@ -1,5 +1,7 @@
 
 import os
+import numpy as np
+import pandas as pd
 
 def listRecursive(d, key):
     for k, v in d.items():
@@ -36,7 +38,6 @@ def subsample_images(images_input_dir, file_names, voxel_subsampling_size, outpu
     return subsampled_files
 
 def print_beta_vectors(args, metric_data, metric_type, covar_labels):
-    import pandas as pd
     """Print regression coefficients as nifti files."""
     data_df = pd.DataFrame(metric_data, columns=covar_labels)
 
@@ -44,8 +45,18 @@ def print_beta_vectors(args, metric_data, metric_type, covar_labels):
         output_file = os.path.join(args["state"]["outputDirectory"], f'{metric_type}_{str(column)}.csv')
         data_df[column].to_csv(output_file, index=False)
 
+def print_p_values(args, p_values, t_values, metric_type, covar_labels):
+    """Print regression coefficients as csv files."""
+    p_df = pd.DataFrame(p_values, columns=covar_labels)
+    t_df = pd.DataFrame(t_values, columns=covar_labels)
+
+    for column in covar_labels:
+        scaled_p_value=  -1 * np.log10(p_df[column]) * np.sign(t_df[column])
+        output_file = os.path.join(args["state"]["outputDirectory"], f'{metric_type}_{str(column)}.csv')
+        scaled_p_value.to_csv(output_file, index=False)
+
+
 def print_rsquared(args, metric_data, metric_type, file_prefix=''):
-    import numpy as np
     output_file = os.path.join(args["state"]["outputDirectory"], f'{metric_type}.csv')
     np.savetxt(output_file, metric_data, delimiter=",")
 
